@@ -9,8 +9,9 @@
 // ------------------------------------------------------------ //
 
 
-let playerChoice = "";
-let compChoice ="";
+let playerChoice;
+let compChoice;
+
 
 //Get computer choice and store value
 // • getComputerChoice()
@@ -29,7 +30,6 @@ function getComputerChoice() {
     return compChoice;
 };
 
-console.log(getComputerChoice());
 
 
 //Get player selection and store choice
@@ -37,7 +37,7 @@ console.log(getComputerChoice());
 // • Will need to somehow get an input from the user. Either through prompt or GUI
 function getPlayerSelection() {
     let playerSelection;
-
+    playerChoice = "";
     while (playerChoice === "") {
         playerSelection = prompt("R,P, or S?: ");
             if (playerSelection.toLowerCase() == "r") {
@@ -51,15 +51,14 @@ function getPlayerSelection() {
             }
     };
     return playerChoice;
-}
+};
 
 
-console.log(getPlayerSelection());
 
 //Evaluate getComputerChoice and getPlayerSelection and store win in variable
-// • game()
-function game() {
-    let result;
+// • playRound()
+function playRound(playerChoice, compChoice) {
+
 
     if (playerChoice == compChoice) {
         result = console.log("It's a draw. Please play again.");
@@ -73,14 +72,20 @@ function game() {
         result = console.log("You lose. Comp chose paper");
     }  else if (playerChoice == "paper" && compChoice == "scissors") {
         result = console.log("You lose. Comp chose scissors");
-    } else {
+    } else if (playerChoice == "scissors" && compChoice == "rock") {
         result = console.log("You lose. Comp chose rock");
     }
 
     return result;
 };
 
+
+function game() {
+    for (let i = 0; i < 5; i++) {
+        playRound(getPlayerSelection(), getComputerChoice());
+    };
+};
+
 game();
-
-
 //Announce Winner of round/game
+//Play 5 rounds
