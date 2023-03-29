@@ -60,7 +60,6 @@ body {
     background-color: #b1b1b1;
     border: #000000 1px solid;
     display: flex;
-    flex: 1;
 }
 
 .profile-container {
@@ -88,7 +87,7 @@ body {
     display: flex;
     justify-content: space-evenly;
     gap: 1em;
-    flex: 1;
+    flex: 2;
 }
 
 
