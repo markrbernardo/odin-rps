@@ -18,3 +18,12 @@ Future Objective: Add a GUI with buttons and text
     - Worked out how to simplify classes a bit more. Still uncertain of best practices.
     - Really focusing on responsiveness
     - Used a CSS media query for the first time
+
+### 04.03.2023
+    - Gutted the old html and started fresh to make the interface better and more responsive.
+    - Tried to keep tabs on classes to make sense.
+
+### 04.05.2023
+    - Began to tinker with javascript to make the html and css more interactive
+    - Created an OnOff sequence utilizing setTimeout() to delay code
+    - Need to getPlayerChoice via button clicks
