@@ -7,56 +7,45 @@
     </head>
 
     <body>
-        <div class="header">
-            <div class="header-container">    
-
-            </div>
-        </div>
-        <div class="main">
-            <div class="game-container">
-                <div class="interface">
-                    <div class="profile-container cpu">
-                        <div class="photo"></div>
-                        <h2>Computer</h2>
-                    </div>
-                    <div class="card-container">
-                        <div class="card card-back"></div>
-                        <div class="card card-back"></div>
-                        <div class="card card-back"></div>
-                    </div>
+        <div class="header"></div>
+        <div class="block empty"></div>
+        <div class="game-container">
+            <h3>The Odin Project</h3>
+            <div class="screen">
+                <div class="vs-box invisible">
+                    <div class="card"></div>
+                    <div class="vs-text"><h4>VS.</h4></div>
+                    <div class="card"></div>
                 </div>
-                <div class="gameboard">
-                    <div class="section-block"></div>
-                    <div class="gametitle">
-                        <h1>Rock, Paper, Scissors!</h1>
-                    </div>
-                    <div class="section-block result">
-                        <div class="image"></div>
-                        <p id="result">Result</p>
-                    </div>
-                    <div class="section-block rounds"><p id="rounds">Round</p></div>        
+                <div class="result-container invisible">
+                    <div class="image"></div>
+                    <h4>Results</h4>
                 </div>
-                <div class="interface player">
-                    <div class="section-block prompt"><p id="prompt">Prompt</p></div>  
-                    <div class="control">
-                        <div class="profile-container player">
-                            <div class="photo"></div>
-                            <h2>Player</h2>
-                        </div>
-                        <div class="card-container">
-                            <div class="card" id="rock"><div class="image rock"></div></div>
-                            <div class="card" id="paper"><div class="image paper"></div></div>
-                            <div class="card" id="scissors"><div class="image scissors"></div></div>
-                        </div>
-                    </div>
+                <div class="screen-text-container"><h2 class="screen-text"></h2></div>
+                <div class="round-indicator invisible">
+                    <p>Round</p>
+                    <div class="round-icon" id="one"></div>
+                    <div class="round-icon" id="two"></div>
+                    <div class="round-icon" id="three"></div>
+                    <div class="round-icon" id="four"></div>
+                    <div class="round-icon" id="five"></div>
                 </div>
             </div>
-        </div>
-        <div class="footer">
-            <div class="footer-container">
-                <p>made by Mark</p>
+            <h1 class="game-title">Rock, Paper, Scissors!</h1>
+            <div class="prompt-container">            
+                <p class="prompt invisible">Please Choose an Object</p>
+            </div>
+            <div class="card-container">
+                <button class="player-card invisible" alt="rock"><h4>&#x270A</h4></button>
+                <button class="player-card invisible" alt="paper"><h4>&#x270B</h4></button>
+                <button class="player-card invisible" alt="scissors"><h4>&#x270C</h4></button>
+            </div>
+            <div class="power-container">
+                <button class="power-button">I/O</button>
             </div>
         </div>
-
+        <div class="block empty"></div>
+        <div class="footer"></div>
+        <script src="app.js"></script>
     </body>    
 </html>

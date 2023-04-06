@@ -17,6 +17,8 @@ let compChoice;
 // • getComputerChoice()
 // • Will need a math.random() to allow computer to choose rock paper or scissors
 // • return value in variable
+
+
 function getComputerChoice() {
     let compDecision = Math.floor(Math.random() * 100);
     if (compDecision <= 33) {

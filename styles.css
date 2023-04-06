@@ -8,177 +8,162 @@
     box-sizing: border-box;
 }
 
-h1 {
-    font-size: 48pt;
-}
-
 body {
-    padding: 0px 12px 0px 12px;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.column {
-    flex-direction: column;
+h1 {
+    font-size: 32pt;
+}
 
+h4 {
+    background-color: #919191;
 }
 
 .header {
     border: #000000 1px solid;
-    padding: 16px;
-    text-align: center;
+    padding: 1em 0em;
+    flex: 0;
 }
 
-.main {
+.block {
     border: #000000 1px solid;
-    display: flex;
-    justify-content: center;
     flex: 1;
 }
 
 .game-container {
     border: #000000 1px solid;
-    max-width: 900px;
-    padding: 2em 2em;
+    padding: 1em 2em;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    flex: 1;
+    flex: 3 0 auto;
 }
 
-.cpu {
-    background-color: #808080;
-}
-
-.player {
-    background-color: #808080;
-}
-
-.interface {
-    background-color: #b1b1b1;
+.screen {
+    background-color: #919191;
     border: #000000 1px solid;
-    display: flex;
-}
-
-.profile-container {
-    border: #000000 1px solid;
-    margin: 0.5em 0 0.5em 1em;
+    border-radius: 25px;
+    margin: 1em 0em;
+    padding: 1.5em 0em;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    flex: 1;
+    justify-content: center;
+    flex: 2 0 0;
 }
 
-.photo {
-    border: #000000 1px solid;
-    border-radius: 6em;
-    width: 6em;
-    height: 6em;
+.screen-text-container {
+    background-color: #919191;
+    height: 1em;
+}
+.screen-text {
+    background-color: #919191;
 }
 
-.card-container {
-    border: #000000 1px solid;
-    margin: 0.5em 1em;
-    padding: 1em 1em;
-    background-color: #b1b1b1;
+.vs-box {
+    background-color: #919191;
     display: flex;
-    justify-content: space-evenly;
-    gap: 1em;
+    justify-content: center;
+    flex: 3;
+    gap: 2em;
+}
+
+.vs-text {
+    background-color: #919191;
+    display: flex;
+    align-items: flex-end;
+}
+
+.result-container {
+    background-color: #919191;
+    display: flex;
+    justify-content: center;
     flex: 2;
 }
 
-
-.card {
-    border: #000000 1px solid;
-    min-height: 150px;
-    min-width: 100px;
-    max-width: 150px;
-    border-radius: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-}
-
 .image {
-    background-color: #b1b1b1;
-    border: #000000 1px dashed;
-    height: 6em;
-    width: 6em;
-}
-
-.cpu {
-    background-color: #b1b1b1;
-}
-
-.player {
-    background-color: #b1b1b1;
-    flex-direction: column;
-}
-
-.gameboard {
-    background-color: #b1b1b1;
     border: #000000 1px solid;
-    margin: 2em 1em;
+    padding: 1em;
+}
+
+.round-indicator {
+    background-color: #919191;
+    max-width: 14em;
+    margin: 1em auto;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    flex: 3;
-}
-
-.gametitle {
-    border: #000000 1px solid;
-    background-color: #b1b1b1;
-    text-align: center;
-}
-
-
-.section-block {
-    background-color: #b1b1b1;
-    border: #000000 1px solid;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-around;
-    flex: 4;
-}
-
-.result {
-    border: #000000 1px solid;
-    min-width: 14em;
-    align-items: center;
     gap: 1em;
-    flex: 3;
 }
 
-.rounds {
-    justify-content: center;
-    align-items: center;
+.round-icon {
+    background-color: #919191;
+    border: #000000 1px solid;
+    border-radius: 25px;
+    width: 25px;
     flex: 1;
 }
 
+.game-title {
+    margin: 0.5em 0em;
+}
+
+.prompt-container {
+    margin-bottom: 1em;
+    height: 1em;
+}
 
 .prompt {
-    border: #000000 1px solid;
-    margin: 0.5em 1em 0 1em;
+    margin-bottom: 0.5em;
 }
 
-.control {
-    background-color: #b1b1b1;
-    border: #000000 1px solid;
+.card-container {
     display: flex;
-    margin: 0em 1em 0.5em 1em;
+    justify-content: space-around;
+    flex: 1;
+}
+
+.card {
+    background-color: #919191;
+    border: #000000 1px solid;
+    border-radius: 10px;
+    min-width: 6em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-card {
+    background-color: #919191;
+    border: #000000 1px solid;
+    border-radius: 10px;
+    min-width: 6em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.power-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.power-button {
+    background-color: #696969;
+    border-radius: 25px;
+    padding-top: 0.25em;
+    margin-top: 1.5em;
+    width: 40px;
+    height: 40px;
 }
 
 .footer {
     border: #000000 1px solid;
-    padding: 4px;
+    padding: 1em 0em;
+    flex: 0;
 }
 
-@media screen and (max-width: 850px) {
-   h1 {
-      font-size: 24pt;
-    }
-  }
+.invisible {
+    display: none;
+}
