@@ -33,4 +33,6 @@
 ### 04.07.2023
 - Fixed button issue where the id value of the .player-card button was not registering 
 - Added some fun sounds to OnOff sequence
--
+- Previewed project on mobile device
+    - The overall look is not great, need to adjust responsiveness
+- Next step is to figure out how to display and evaluate the 5-round system
