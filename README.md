@@ -1,4 +1,5 @@
 # Odin Project: Rock, Paper, Scissors
+*This Project uses Audio from http://www.Zapsplat.com*
 Objective: make a simple implementation of "Rock, Paper, Scissors" run on the console.
 Future Objective: Add a GUI with buttons and text
 
@@ -20,10 +21,15 @@ Future Objective: Add a GUI with buttons and text
     - Used a CSS media query for the first time
 
 ### 04.03.2023
-    - Gutted the old html and started fresh to make the interface better and more responsive.
-    - Tried to keep tabs on classes to make sense.
+- Gutted the old html and started fresh to make the interface better and more responsive.
+- Tried to keep tabs on classes to make sense.
 
 ### 04.05.2023
-    - Began to tinker with javascript to make the html and css more interactive
-    - Created an OnOff sequence utilizing setTimeout() to delay code
-    - Need to getPlayerChoice via button clicks
+- Began to tinker with javascript to make the html and css more interactive
+- Created an OnOff sequence utilizing setTimeout() to delay code
+- Need to getPlayerChoice via button clicks
+
+### 04.07.2023
+- Fixed button issue where the id value of the .player-card button was not registering 
+- Added some fun sounds to OnOff sequence
+-
