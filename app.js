@@ -8,6 +8,7 @@ const cardContainer = document.querySelector(".card-container");
 //Components
 const roundIcon = document.querySelectorAll(".round-icon");
 const playerCard = document.querySelectorAll(".player-card");
+const resultText = document.querySelector(".result-text");
 const screenText = document.querySelector(".screen-text");
 const gameTitle = document.querySelector(".game-title");
 const powerButton = document.querySelector(".power-button");
@@ -18,24 +19,17 @@ let power = 0;
 let playerSelection;
 let computerChoice;
 
-
+//Sounds
 let powerOnSound = new Audio("audio/power-on-sound.mp3");
 let powerOffSound = new Audio("audio/power-off-sound.mp3");
 
-//Testers
 
 
 powerSwitch();
 
-//Text Flash Script
-/* let screenTextFlash =  setInterval(() => {
-    screenText.classList.add("invisible");
-    setTimeout(() => {screenText.classList.remove("invisible");}, 2000)
-});
-
-clearInterval(screenTextFlash); */
 
 
+//Power button event
 function powerSwitch () {
     screenText.textContent = "< Turn on Console to Play >";
 
@@ -52,7 +46,7 @@ function powerSwitch () {
     });
 };
 
-
+//OnOff Sequences
 function powerOnSequence() {
     screenText.classList.add("invisible");
     screenText.textContent = "Welcome to Rock Paper Scissors!";
@@ -63,7 +57,6 @@ function powerOnSequence() {
             };
     }, 1500);
     power++;
-    roundCounter();
 }
 
 function powerOffSequence() {
@@ -85,12 +78,12 @@ function powerOffSequence() {
 //Create an array to store RPS
 const objectChoices = ["rock", "paper", "scissors"];
 
-//Make function for getComputerChoice() and use the array
+//getComputerChoice() from random array
 function getComputerChoice() {
-    return objectChoices[~~Math.random() * objectChoices.length];
+    return objectChoices[Math.floor(Math.random() * objectChoices.length)];
 }
 
-//Make function for getPlayerChoice() utilizing id
+//getPlayerChoice() from card clicks
 playerCard.forEach((card) => {
     card.addEventListener("click", () => {
         const objectChoice = card.getAttribute("id");
@@ -101,37 +94,37 @@ playerCard.forEach((card) => {
     })
 })
 
-//Round function for gameplay
+//Gameplay
 function gamePlay (playerChoice, computerChoice) {
+    screenText.classList.add("invisible");
     computerChoice = getComputerChoice().toLowerCase();
     playerChoice = playerChoice.toLowerCase();
 
     if (playerChoice == "rock" && computerChoice == "scissors") {
-        screenText.textContent = ("You Win! Rock beats Scissors!");
-        screenText.classList.remove("invisible");
+        resultContainer.classList.remove("invisible");
+        resultText.textContent = ("You Win! Rock beats Scissors!");
     } else if (playerChoice == "rock" && computerChoice == "paper") {
-        screenText.textContent = ("You Lose! Paper beats Rock!");
-        screenText.classList.remove("invisible");
+        resultContainer.classList.remove("invisible");
+        resultText.textContent = ("You Lose. Paper beats Rock.");
     } else if (playerChoice == "paper" && computerChoice == "rock") {
-        screenText.textContent = ("You Win! Paper beats Rock!");
-        screenText.classList.remove("invisible");
+        resultContainer.classList.remove("invisible");
+        resultText.textContent = ("You Win! Paper beats Rock!");
     } else if (playerChoice == "paper" && computerChoice == "scissors") {
-        screenText.textContent = ("You Lose! Scissors beats Paper!");
-        screenText.classList.remove("invisible");
+        resultContainer.classList.remove("invisible");
+        resultText.textContent = ("You Lose. Scissors beat Paper.");
     } else if (playerChoice == "scissors" && computerChoice == "paper") {
-        screenText.textContent = ("You Win! Scissors beats Paper!");
-        screenText.classList.remove("invisible");
+        resultContainer.classList.remove("invisible");
+        resultText.textContent = ("You Win! Scissors beats Paper!");
     } else if (playerChoice == "scissors" && computerChoice == "rock") {
-        screenText.textContent = ("You Lose! Rock beats Scissors!");
-        screenText.classList.remove("invisible");
+        resultContainer.classList.remove("invisible");
+        resultText.textContent = ("You Lose! Rock beats Scissors");
     } else {
-        screenText.textContent = ("Draw.");
-        screenText.classList.remove("invisible");
+        resultContainer.classList.remove("invisible");
+        resultText.textContent = ("You Win! Rock beats Scissors!");
     }
 }
 
 //Round-counter
-
 let round = 0;
 
 function roundCounter() {
@@ -156,3 +149,17 @@ function roundCounter() {
 }
 
 //Results
+
+
+
+
+
+//Unused Code
+
+//Text Flash Script
+/* let screenTextFlash =  setInterval(() => {
+    screenText.classList.add("invisible");
+    setTimeout(() => {screenText.classList.remove("invisible");}, 2000)
+});
+
+clearInterval(screenTextFlash); */
