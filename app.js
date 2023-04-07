@@ -7,6 +7,8 @@ const cardContainer = document.querySelector(".card-container");
 
 //Components
 const roundIcon = document.querySelectorAll(".round-icon");
+const vsBoxPlayerCard = document.querySelector(".player-choice");
+const vsBoxCompCard = document.querySelector(".cpu-choice")
 const playerCard = document.querySelectorAll(".player-card");
 const resultText = document.querySelector(".result-text");
 const screenText = document.querySelector(".screen-text");
@@ -24,24 +26,22 @@ let powerOnSound = new Audio("audio/power-on-sound.mp3");
 let powerOffSound = new Audio("audio/power-off-sound.mp3");
 
 
-
+//The Stage
 powerSwitch();
 
 
-
-//Power button event
+//Switch function
 function powerSwitch () {
     screenText.textContent = "< Turn on Console to Play >";
 
     powerButton.addEventListener("click", () => {
         if (power == 0) {
+            console.log(power);
             powerOnSequence();
-            console.log(power);
-            powerOnSound.play();
+
         }   else {
-            powerOffSequence();
             console.log(power);
-            powerOffSound.play();
+            powerOffSequence();
         }
     });
 };
@@ -49,6 +49,7 @@ function powerSwitch () {
 //OnOff Sequences
 function powerOnSequence() {
     screenText.classList.add("invisible");
+    powerOnSound.play();
     screenText.textContent = "Welcome to Rock Paper Scissors!";
     setTimeout(() => {
         screenText.classList.remove("invisible");
@@ -60,6 +61,9 @@ function powerOnSequence() {
 }
 
 function powerOffSequence() {
+    powerOffSound.play();
+    resultContainer.classList.add("invisible");
+    vsBox.classList.add("invisible");
     screenText.textContent = "Powering off..";
     screenText.classList.remove("invisible");
     setTimeout(() => {
@@ -67,7 +71,7 @@ function powerOffSequence() {
         for (var i = 0; i < playerCard.length; i++) {
             playerCard[i].classList.add("invisible");
             };
-    }, 1500);
+    }, 1400);
     power--;
 }
 
@@ -80,7 +84,9 @@ const objectChoices = ["rock", "paper", "scissors"];
 
 //getComputerChoice() from random array
 function getComputerChoice() {
-    return objectChoices[Math.floor(Math.random() * objectChoices.length)];
+    let cpuChoice = objectChoices[Math.floor(Math.random() * objectChoices.length)];
+    console.log(cpuChoice);
+    return cpuChoice;
 }
 
 //getPlayerChoice() from card clicks
@@ -100,27 +106,40 @@ function gamePlay (playerChoice, computerChoice) {
     computerChoice = getComputerChoice().toLowerCase();
     playerChoice = playerChoice.toLowerCase();
 
+
+    vsBox.classList.remove("invisible");
+    vsBoxPlayerCard.textContent = (playerChoice);
+    vsBoxCompCard.textContent = (computerChoice);
+
+
     if (playerChoice == "rock" && computerChoice == "scissors") {
         resultContainer.classList.remove("invisible");
         resultText.textContent = ("You Win! Rock beats Scissors!");
+        round++;
     } else if (playerChoice == "rock" && computerChoice == "paper") {
         resultContainer.classList.remove("invisible");
         resultText.textContent = ("You Lose. Paper beats Rock.");
+        round++;
     } else if (playerChoice == "paper" && computerChoice == "rock") {
         resultContainer.classList.remove("invisible");
         resultText.textContent = ("You Win! Paper beats Rock!");
+        round++;
     } else if (playerChoice == "paper" && computerChoice == "scissors") {
         resultContainer.classList.remove("invisible");
         resultText.textContent = ("You Lose. Scissors beat Paper.");
+        round++;
     } else if (playerChoice == "scissors" && computerChoice == "paper") {
         resultContainer.classList.remove("invisible");
         resultText.textContent = ("You Win! Scissors beats Paper!");
+        round++;
     } else if (playerChoice == "scissors" && computerChoice == "rock") {
         resultContainer.classList.remove("invisible");
-        resultText.textContent = ("You Lose! Rock beats Scissors");
+        resultText.textContent = ("You Lose. Rock beats Scissors.");
+        round++;
     } else {
         resultContainer.classList.remove("invisible");
-        resultText.textContent = ("You Win! Rock beats Scissors!");
+        resultText.textContent = ("Draw.");
+        round++;
     }
 }
 
