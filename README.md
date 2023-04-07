@@ -1,4 +1,5 @@
 # Odin Project: Rock, Paper, Scissors
+*Preview of this Project is found here: https://htmlpreview.github.io/?https://github.com/markrbernardo/odin-rps/blob/main/index.html*
 *This Project uses Audio from http://www.Zapsplat.com*
 Objective: make a simple implementation of "Rock, Paper, Scissors" run on the console.
 Future Objective: Add a GUI with buttons and text
