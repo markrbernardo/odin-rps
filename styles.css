@@ -67,6 +67,7 @@ h4 {
     background-color: #919191;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex: 3;
     gap: 2em;
 }
@@ -81,12 +82,17 @@ h4 {
     background-color: #919191;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex: 2;
 }
 
 .image {
     border: #000000 1px solid;
     padding: 1em;
+}
+
+.result-text {
+    margin-left: 1em;
 }
 
 .round-indicator {
