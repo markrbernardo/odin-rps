@@ -36,3 +36,5 @@
 - Previewed project on mobile device
     - The overall look is not great, need to adjust responsiveness
 - Next step is to figure out how to display and evaluate the 5-round system
+- The game generally does what I want to do, but I need to fix the roundIndicatorSequence from running the 6th time.
+- I have a lot of repeating code that I can clean up.
