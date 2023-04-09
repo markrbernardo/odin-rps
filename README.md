@@ -38,3 +38,17 @@
 - Next step is to figure out how to display and evaluate the 5-round system
 - The game generally does what I want to do, but I need to fix the roundIndicatorSequence from running the 6th time.
 - I have a lot of repeating code that I can clean up.
+
+### 04.08.2023
+- I pretty much have a very ROUGH v1.0 of RPS.
+    - I have a working javascript code for RPS that
+        - Has an on/off switch
+        - Plays a game of RPS using a GUI
+        - Evaluates the overall player/cpu score (not explicitly)
+        - Has a 5-round system
+        - Has a replay function
+        - Sequence of events work
+- I want to add win/lose tokens on the round icons
+- App breaks when you turn on/off too quickly
+    
+    
