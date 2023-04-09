@@ -4,6 +4,7 @@ const vsBox = document.querySelector(".vs-box");
 const resultContainer = document.querySelector(".result-container");
 const roundIndicator = document.querySelector(".round-indicator");
 const cardContainer = document.querySelector(".card-container");
+const replayContainer = document.querySelector(".replay-container");
 
 //Components
 const roundIcon = document.querySelectorAll(".round-icon");
@@ -15,21 +16,30 @@ const screenText = document.querySelector(".screen-text");
 const gameTitle = document.querySelector(".game-title");
 const powerButton = document.querySelector(".power-button");
 const playerPrompt = document.querySelector(".prompt");
+const replayButton = document.querySelectorAll(".replay");
+const one = document.querySelector("#one");
+const two = document.querySelector("#two");
+const three = document.querySelector("#three");
+const four = document.querySelector("#four");
+const five = document.querySelector("#five");
 
 //Default States
 let power = 0;
-let round = 1;
+let round = 0;
 let playerSelection;
 let computerChoice;
 let playerScore = 0;
 let cpuScore = 0;
+let roundNumber;
 
 //Sounds
 const powerOnSound = new Audio("audio/power-on-sound.mp3");
 const powerOffSound = new Audio("audio/power-off-sound.mp3");
 const winSound = new Audio("audio/win-sound.mp3");
 const loseSound = new Audio("audio/lose-sound.mp3");
-const resultWin = new Audio ("audio/result-win-sound");
+const drawSound = new Audio ("audio/draw-sound.mp3");
+const resultWin = new Audio ("audio/result-win-sound.mp3");
+const resultLose = new Audio ("audio/result-lose-sound.mp3");
 
 
 //The Stage
@@ -48,10 +58,12 @@ function powerSwitch () {
 
         }   else {
             console.log(power);
+            console.log(round);
+            round = 0;
             powerOffSequence();
         }
     });
-};
+}
 
 //OnOff Sequences
 function powerOnSequence() {
@@ -66,9 +78,12 @@ function powerOnSequence() {
 }
 
 function powerOffSequence() {
+    clearTimeout();
     powerOffSound.play();
     resultContainer.classList.add("invisible");
     vsBox.classList.add("invisible");
+    roundIndicator.classList.add("invisible");
+    playerPrompt.classList.add("invisible");
     screenText.textContent = "Powering off..";
     screenText.classList.remove("invisible");
     setTimeout(() => {
@@ -81,38 +96,43 @@ function powerOffSequence() {
 }
 
 function roundIndicatorSequence() {
-    let one = document.querySelector("#one");
-    let two = document.querySelector("#two");
-    let three = document.querySelector("#three");
-    let four = document.querySelector("#four");
-    let five = document.querySelector("#five");
+    round++;
+    console.log(round);
+
     setTimeout(() => {
-        roundCounter();
-        vsBox.classList.add("invisible");
         resultContainer.classList.add("invisible");
+        vsBox.classList.add("invisible");
+        roundCounter();
     }, 3000);
     
     function roundCounter() {
         screenText.classList.add("invisible");
-        let roundNumber;
         if (round == 1) {
             one.classList.add("shade");
             roundNumber = 1;
+            showRoundText();
+            setupPlayerInterface();
         } else if (round == 2) {
             one.classList.add("shade");
             two.classList.add("shade");
             roundNumber = 2;
+            showRoundText();
+            setupPlayerInterface();
         } else if (round == 3) {
             one.classList.add("shade");
             two.classList.add("shade");
             three.classList.add("shade");
             roundNumber = 3;
+            showRoundText();
+            setupPlayerInterface();
         } else if (round == 4) {
             one.classList.add("shade");
             two.classList.add("shade");
             three.classList.add("shade");
             four.classList.add("shade");
             roundNumber = 4;
+            showRoundText();
+            setupPlayerInterface();
         } else if (round == 5) {
             one.classList.add("shade");
             two.classList.add("shade");
@@ -120,19 +140,23 @@ function roundIndicatorSequence() {
             four.classList.add("shade");
             five.classList.add("shade");
             roundNumber = 5;
+            showRoundText();
+            setupPlayerInterface();
+        } else if (round == 6) {
+            resultContainer.classList.remove("invisible");
+            setTimeout(evaluateScore(), 3000);
         } else {
-            getPlayerReplay;
+            clearTimeout();
         }
-    
-        screenText.textContent = (`Round ${roundNumber}`);
-        screenText.classList.remove("invisible");
-        roundIndicator.classList.remove("invisible");
-
-        gameSetup();
     }
 }
 
 
+function showRoundText() {
+    screenText.textContent = (`Round ${roundNumber}`);
+    screenText.classList.remove("invisible");
+    roundIndicator.classList.remove("invisible");
+}
 
 /* Script for RPS */
 //Create an array to store RPS
@@ -151,26 +175,21 @@ playerCard.forEach((card) => {
         const objectChoice = card.getAttribute("id");
         playerChoice = objectChoice;
         console.log(playerChoice);
-
+        
         playerPrompt.classList.add("invisible");
         for (var i = 0; i < playerCard.length; i++) {
         playerCard[i].classList.add("invisible");
         };
 
-        setTimeout(() => {
-            gamePlay(playerChoice, computerChoice);
-            if (round > 5) {
-                evaluateScore();
-                getPlayerReplay();
-            }
-        }, 1000);
-    
-
-
+        if (round <= 5) {
+            setTimeout(gamePlay(playerChoice, computerChoice), 1000);
+        } else {
+            setTimeout(evaluateScore(), 3000);
+        }
     })
-})
+});
 
-function gameSetup() {
+function setupPlayerInterface() {
     setTimeout(() => {
         playerPrompt.classList.remove("invisible");
         for (var i = 0; i < playerCard.length; i++) {
@@ -180,104 +199,135 @@ function gameSetup() {
 }
 
 
-
-//Gameplay
 function gamePlay (playerChoice, computerChoice) {
     screenText.classList.add("invisible");
     computerChoice = getComputerChoice().toLowerCase();
     playerChoice = playerChoice.toLowerCase();
 
-
     vsBox.classList.remove("invisible");
     vsBoxPlayerCard.textContent = (playerChoice);
     vsBoxCompCard.textContent = (computerChoice);
 
-
-    if (round <= 5 && playerChoice == "rock" && computerChoice == "scissors") {
+    if (playerChoice == "rock" && computerChoice == "scissors") {
         resultContainer.classList.remove("invisible");
         resultText.textContent = ("You Win! Rock beats Scissors!");
         winSound.play();
-        round++;
-        console.log(round);
         playerScore ++;
-        setTimeout(roundIndicatorSequence, 1000);
-    } else if (round <= 5 && playerChoice == "rock" && computerChoice == "paper") {
+    } else if (playerChoice == "rock" && computerChoice == "paper") {
         resultContainer.classList.remove("invisible");
         resultText.textContent = ("You Lose. Paper beats Rock.");
         loseSound.play();
-        round++;
-        console.log(round);
         cpuScore++;
-        setTimeout(roundIndicatorSequence, 1000);
-    } else if (round <= 5 && playerChoice == "paper" && computerChoice == "rock") {
+    } else if (playerChoice == "paper" && computerChoice == "rock") {
         resultContainer.classList.remove("invisible");
         resultText.textContent = ("You Win! Paper beats Rock!");
         winSound.play();
-        round++;
-        console.log(round);
         playerScore ++;
-        setTimeout(roundIndicatorSequence, 1000);
-    } else if (round <= 5 && playerChoice == "paper" && computerChoice == "scissors") {
+    } else if (playerChoice == "paper" && computerChoice == "scissors") {
         resultContainer.classList.remove("invisible");
         resultText.textContent = ("You Lose. Scissors beat Paper.");
         loseSound.play();
-        round++;
-        console.log(round);
         cpuScore++;
-        setTimeout(roundIndicatorSequence, 1000);
-    } else if (round <= 5 && playerChoice == "scissors" && computerChoice == "paper") {
+    } else if (playerChoice == "scissors" && computerChoice == "paper") {
         resultContainer.classList.remove("invisible");
         resultText.textContent = ("You Win! Scissors beats Paper!");
         winSound.play();
-        round++;
-        console.log(round);
         playerScore ++;
-        setTimeout(roundIndicatorSequence, 1000);
-    } else if (round <= 5 && playerChoice == "scissors" && computerChoice == "rock") {
+    } else if (playerChoice == "scissors" && computerChoice == "rock") {
         resultContainer.classList.remove("invisible");
         resultText.textContent = ("You Lose. Rock beats Scissors.");
         loseSound.play();
-        round++;
-        console.log(round);
         cpuScore++;
-        setTimeout(roundIndicatorSequence, 1500);
-    } else if (round <= 5 && playerChoice == computerChoice) {
+    } else {
         resultContainer.classList.remove("invisible");
         resultText.textContent = ("Draw.");
-        round++;
-        console.log(round);
-        setTimeout(roundIndicatorSequence, 1000);
+        drawSound.play();
+    }
+
+    roundListener();
+}
+
+
+function roundListener () {
+    console.log(round);
+    
+    if (round <= 5) {
+        roundIndicatorSequence();
     } else {
         evaluateScore();
     }
 }
 
-//Score Evaluation
+
 function evaluateScore() {
     vsBox.classList.add("invisible");
     screenText.classList.add("invisible");
-    roundIndicator.classList.add("invisble");
+    roundIndicator.classList.add("invisible");
 
     if (playerScore > cpuScore) {
         resultText.textContent = ("You win! Best out of 5!");
+        console.log(resultContainer.classList);
         resultWin.play();
-        resultText.classList.remove("invisible");
+        setTimeout(getPlayerReplay(), 2000);
     } else if (playerScore < cpuScore) {
         resultText.textContent = ("You Lose. The CPU did best out of 5.");
-        resultText.classList.remove("invisible");
+        console.log(resultContainer.classList);
+        resultLose.play();
+        setTimeout(getPlayerReplay(), 2000);
     } else {
         resultText.textContent = ("It was a draw.");
-        resultText.classList.remove("invisible");
+        console.log(resultContainer.classList);
+        drawSound.play();
+        setTimeout(getPlayerReplay(), 2000);
     }
+
+    
 }
 
-//Results
 
 function getPlayerReplay() {
+   setTimeout(() => {
     screenText.classList.remove("invisible");
     screenText.textContent = ("Would you Like to Play Again?");
-
+    replayContainer.classList.remove("invisible");
+    vsBox.classList.add("invisible");
+    roundIndicator.classList.add("invisible");
+    playerPrompt.classList.add("invisible");
+    for (var i = 0; i < playerCard.length; i++) {
+        playerCard[i].classList.add("invisible");
+        };
+   }, 3000);
 }
+
+function clearRoundIcons() {
+    two.classList.remove("shade");
+    three.classList.remove("shade");
+    four.classList.remove("shade");
+    five.classList.remove("shade");
+}
+
+replayButton.forEach((option) => {
+    option.addEventListener("click", () => {
+        const replayChoice = option.getAttribute("id");
+            
+        if (replayChoice.toLowerCase() == "yes-replay") {
+            replayContainer.classList.add("invisible");
+            screenText.classList.add("invisible");
+            resultContainer.classList.add("invisible");
+            console.log(round);
+            powerOnSound.play();
+            clearRoundIcons();
+            roundIndicatorSequence();
+        } else {
+            replayContainer.classList.add("invisible");
+            resultContainer.classList.add("invisible");
+            clearRoundIcons();
+            powerOffSequence();
+        }
+
+        round = 0;
+    })
+})
 
 
 
