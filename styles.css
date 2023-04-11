@@ -1,8 +1,8 @@
 * {
     color: #000000;
     font-family:Arial, Helvetica, sans-serif;
-    font-size: 12pt;
-    background-color:#808080;
+    font-size: 16pt;
+    background-color:#464557;
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
@@ -15,13 +15,22 @@ body {
     justify-content: space-between;
 }
 
-h1 {
-    font-size: 32pt;
-}
-
-p, h4 {
+p, h4, h5 {
     background-color: #919191;
 }
+
+h1 {
+    font-size: 48pt;
+}
+
+h2, h4 {
+    font-size: 24pt;
+}
+
+h5 {
+    font-size: 72pt;
+}
+
 
 .header {
     border: #000000 1px solid;
@@ -61,6 +70,8 @@ p, h4 {
 }
 .screen-text {
     background-color: #919191;
+    font-size: 24pt;
+    font-weight: bold;
 }
 
 .vs-box {
@@ -92,6 +103,7 @@ p, h4 {
 }
 
 .result-text {
+    font-size: 24pt;
     margin-left: 1em;
 }
 
@@ -110,6 +122,7 @@ p, h4 {
 
 .round-indicator {
     background-color: #919191;
+    font-size: 24pt;
     max-width: 14em;
     margin: 1em auto;
     display: flex;
@@ -134,6 +147,8 @@ p, h4 {
 }
 
 .prompt {
+
+    background-color: #464557;
     margin-bottom: 0.5em;
 }
 
@@ -157,7 +172,8 @@ p, h4 {
     background-color: #919191;
     border: #000000 1px solid;
     border-radius: 10px;
-    min-width: 6em;
+    min-width: 12em;
+    min-height: 15em;
     display: flex;
     justify-content: center;
     align-items: center;
