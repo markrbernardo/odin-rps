@@ -50,5 +50,8 @@
         - Sequence of events work
 - I want to add win/lose tokens on the round icons
 - App breaks when you turn on/off too quickly
-    
+
+### 04.10.2023
+- Began to redesign the GUI of RPS
+    - I am realizing that responsiveness is kind of tricky to get right.
     
