@@ -92,6 +92,7 @@ function powerOffSequence() {
             playerCard[i].classList.add("invisible");
             };
     }, 1400);
+    round = 0;
     power--;
 }
 
@@ -317,6 +318,7 @@ replayButton.forEach((option) => {
             console.log(round);
             powerOnSound.play();
             clearRoundIcons();
+            round = 0;
             roundIndicatorSequence();
         } else {
             replayContainer.classList.add("invisible");
@@ -324,8 +326,6 @@ replayButton.forEach((option) => {
             clearRoundIcons();
             powerOffSequence();
         }
-
-        round = 0;
     })
 })
 
