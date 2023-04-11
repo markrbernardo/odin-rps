@@ -1,7 +1,6 @@
 * {
     color: #000000;
     font-family:Arial, Helvetica, sans-serif;
-    font-size: 16pt;
     background-color:#464557;
     padding: 0px;
     margin: 0px;
@@ -13,24 +12,37 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
 
-p, h4, h5 {
+h4, h5 {
     background-color: #919191;
 }
 
 h1 {
-    font-size: 48pt;
+    font-size: 3rem;
 }
 
-h2, h4 {
+h2 {
     font-size: 24pt;
+}
+
+h3 {
+    font-size: 24pt;
+}
+
+h4 {
+    font-size: 20pt;
 }
 
 h5 {
     font-size: 72pt;
 }
 
+
+.header, .block, .footer {
+    width: 100vw;
+}
 
 .header {
     border: #000000 1px solid;
@@ -40,15 +52,19 @@ h5 {
 
 .block {
     border: #000000 1px solid;
+    height: 2em;
     flex: 1;
 }
 
 .game-container {
     border: #000000 1px solid;
     padding: 1em 2em;
+    width: 80%;
+    height: 80%;
     text-align: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     flex: 3 0 auto;
 }
 
@@ -58,29 +74,26 @@ h5 {
     border-radius: 25px;
     margin: 1em 0em;
     padding: 1.5em 0em;
+    height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex: 2 0 0;
+    gap: 2em;
 }
 
-.screen-text-container {
-    background-color: #919191;
-    height: 1em;
-}
-.screen-text {
-    background-color: #919191;
-    font-size: 24pt;
-    font-weight: bold;
-}
 
 .vs-box {
     background-color: #919191;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 3;
     gap: 2em;
+    z-index: 1;
+}
+
+.player-choice, .cpu-choice {
+    background-color: #919191;
+    min-height: 5em;
 }
 
 .vs-text {
@@ -94,7 +107,7 @@ h5 {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 2;
+    z-index: 1;
 }
 
 .image {
@@ -107,34 +120,47 @@ h5 {
     margin-left: 1em;
 }
 
+.screen-text-container {
+    background-color: #919191;
+    height: 2em;
+    z-index: 1;
+}
+
+.screen-text {
+    background-color: #919191;
+    font-size: 20pt;
+    font-weight: bold;
+}
+
 .replay-container {
     background-color: #919191;
-    padding-top: 1em;
     display: flex;
     justify-content: center;
     gap: 2em;
+    z-index: 1;
 }
 
 .replay {
     background-color: #919191;
+    font-size: 12pt;
     padding: 0.5em;
 }
 
 .round-indicator {
     background-color: #919191;
-    font-size: 24pt;
-    max-width: 14em;
-    margin: 1em auto;
+    margin: 0 auto;
     display: flex;
+    align-items: center;
     gap: 1em;
+    z-index: 1;
 }
 
 .round-icon {
     background-color: #919191;
     border: #000000 1px solid;
     border-radius: 25px;
-    width: 25px;
-    flex: 1;
+    min-width: 25px;
+    height: 1.5rem;
 }
 
 .game-title {
@@ -147,15 +173,15 @@ h5 {
 }
 
 .prompt {
-
     background-color: #464557;
     margin-bottom: 0.5em;
 }
 
 .card-container {
+    margin-top: 1em;
     display: flex;
     justify-content: space-around;
-    flex: 1;
+    height: 15em;
 }
 
 .card {
@@ -173,7 +199,6 @@ h5 {
     border: #000000 1px solid;
     border-radius: 10px;
     min-width: 12em;
-    min-height: 15em;
     display: flex;
     justify-content: center;
     align-items: center;
