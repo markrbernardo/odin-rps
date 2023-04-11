@@ -74,11 +74,11 @@ function powerOnSequence() {
         screenText.classList.remove("invisible");
         roundIndicatorSequence();
     }, 1500);
-    power++;
+    power = 1;
 }
 
 function powerOffSequence() {
-    clearTimeout();
+    clearTimeout(roundIndicatorSequence);
     powerOffSound.play();
     resultContainer.classList.add("invisible");
     vsBox.classList.add("invisible");
@@ -86,14 +86,17 @@ function powerOffSequence() {
     playerPrompt.classList.add("invisible");
     screenText.textContent = "Powering off..";
     screenText.classList.remove("invisible");
-    setTimeout(() => {
-        screenText.textContent = "< Turn on Console to Play >";
+    displayPowerText();
+    round = 0;
+    power = 0;
+}
+
+function displayPowerText() {
+    setTimeout(() => {screenText.textContent = "< Turn on Console to Play >";
         for (var i = 0; i < playerCard.length; i++) {
             playerCard[i].classList.add("invisible");
             };
-    }, 1400);
-    round = 0;
-    power--;
+        }, 1400);
 }
 
 function roundIndicatorSequence() {
@@ -147,7 +150,7 @@ function roundIndicatorSequence() {
             resultContainer.classList.remove("invisible");
             setTimeout(evaluateScore(), 3000);
         } else {
-            clearTimeout();
+            clearTimeout(roundIndicatorSequence);
         }
     }
 }
