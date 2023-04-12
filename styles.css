@@ -20,7 +20,7 @@ h4, h5 {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 3em;
 }
 
 h2 {
@@ -36,7 +36,13 @@ h4 {
 }
 
 h5 {
-    font-size: 72pt;
+    font-size: 64pt;
+    padding-bottom: 0.2em;
+}
+
+h6 {
+    background-color: #696969;
+    font-size: 20pt;
 }
 
 
@@ -60,12 +66,16 @@ h5 {
     border: #000000 1px solid;
     padding: 1em 2em;
     width: 80%;
-    height: 80%;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex: 3 0 auto;
+    gap: 0.5em;
+}
+
+.odin {
+    margin-top: auto;
 }
 
 .screen {
@@ -74,11 +84,12 @@ h5 {
     border-radius: 25px;
     margin: 1em 0em;
     padding: 1.5em 0em;
-    height: 500px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 2em;
+    flex: 2 0 auto;
+    gap: .5em;
 }
 
 
@@ -88,11 +99,11 @@ h5 {
     justify-content: center;
     align-items: center;
     gap: 2em;
-    z-index: 1;
 }
 
 .player-choice, .cpu-choice {
     background-color: #919191;
+    font-size: 24pt;
     min-height: 5em;
 }
 
@@ -107,10 +118,9 @@ h5 {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1;
 }
 
-.image {
+.result-image {
     border: #000000 1px solid;
     padding: 1em;
 }
@@ -123,7 +133,6 @@ h5 {
 .screen-text-container {
     background-color: #919191;
     height: 2em;
-    z-index: 1;
 }
 
 .screen-text {
@@ -137,7 +146,6 @@ h5 {
     display: flex;
     justify-content: center;
     gap: 2em;
-    z-index: 1;
 }
 
 .replay {
@@ -152,7 +160,6 @@ h5 {
     display: flex;
     align-items: center;
     gap: 1em;
-    z-index: 1;
 }
 
 .round-icon {
@@ -160,28 +167,33 @@ h5 {
     border: #000000 1px solid;
     border-radius: 25px;
     min-width: 25px;
-    height: 1.5rem;
+    height: 1.5em;
 }
 
 .game-title {
-    margin: 0.5em 0em;
+    margin: 0.25em 0em;
 }
 
 .prompt-container {
-    margin-bottom: 1em;
-    height: 1em;
+    margin-top: 2em;
+    
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex: 1 0 auto;
 }
 
 .prompt {
     background-color: #464557;
-    margin-bottom: 0.5em;
 }
 
 .card-container {
     margin-top: 1em;
+    height: 12em;
     display: flex;
     justify-content: space-around;
-    height: 15em;
+    align-items: center;
+    flex: 1 0 auto;
 }
 
 .card {
@@ -198,7 +210,8 @@ h5 {
     background-color: #919191;
     border: #000000 1px solid;
     border-radius: 10px;
-    min-width: 12em;
+    min-width: 10em;
+    height: 12em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -207,15 +220,13 @@ h5 {
 .power-container {
     display: flex;
     justify-content: flex-end;
+    margin-top: auto;
 }
 
 .power-button {
     background-color: #696969;
-    border-radius: 25px;
-    padding-top: 0.25em;
-    margin-top: 1.5em;
-    width: 40px;
-    height: 40px;
+    border-radius: 30px;
+    padding: 0.80em 0.55em 0.65em 0.60em;
 }
 
 .footer {
