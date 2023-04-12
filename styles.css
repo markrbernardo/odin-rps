@@ -58,8 +58,8 @@ h6 {
 
 .block {
     border: #000000 1px solid;
-    height: 2em;
-    flex: 1;
+    height: 1em;
+    flex: 1 0 auto;
 }
 
 .game-container {
@@ -75,6 +75,7 @@ h6 {
 }
 
 .odin {
+    border: #000000 1px solid;
     margin-top: auto;
 }
 
@@ -171,12 +172,14 @@ h6 {
 }
 
 .game-title {
+    border: #000000 1px solid;
     margin: 0.25em 0em;
 }
 
 .prompt-container {
+    border: #000000 1px solid;
     margin-top: 2em;
-    
+    height: 2.5em;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -188,6 +191,7 @@ h6 {
 }
 
 .card-container {
+    border: #000000 1px solid;
     margin-top: 1em;
     height: 12em;
     display: flex;
