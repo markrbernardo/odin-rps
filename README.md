@@ -54,4 +54,7 @@
 ### 04.10.2023
 - Began to redesign the GUI of RPS
     - I am realizing that responsiveness is kind of tricky to get right.
+
+### 04.16.2023
+- Continued to restyle app. It's slowly looking how I want it to
     
