@@ -57,4 +57,15 @@
 
 ### 04.16.2023
 - Continued to restyle app. It's slowly looking how I want it to
-    
+
+#RPS Redo
+## 04.17.2023 Notes
+- Complete redo. Seem to have better result and cleaner code.
+- Referenced other code. Responsiveness worked best with the main area being responsive and not the header or footer.
+
+## 04.20.2023 Notes
+- Will try to fix reset of rounds and grayscale/remove button of input.
+    - Reset works only once -- Then round counter doubles or triples roundEvaluation on single click.
+- Need to fix eventListener issues. 
+    - Need to somehow make the function work for both add/removeEventListener. (Simply stating the same anonymous function does not mean that the functions are the same.)
+    - Therefore, I think I need to somehow simplify the expressions in order to make this work.
