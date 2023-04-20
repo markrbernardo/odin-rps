@@ -204,61 +204,61 @@ function gamePlay (playerChoice, computerChoice) {
         vsBoxPlayerCard.textContent = ("✊");
         vsBoxCompCard.textContent = ("✌");
         showResults();
-        resultText.textContent = ("You Win! Rock beats Scissors!");
+        resultText.textContent = ("😀 You Win! Rock beats Scissors!");
         winSound.play();
         playerScore ++;
     } else if (playerChoice == "rock" && computerChoice == "paper") {
         vsBoxPlayerCard.textContent = ("✊");
         vsBoxCompCard.textContent = ("✋");
         showResults();
-        resultText.textContent = ("You Lose. Paper beats Rock.");
+        resultText.textContent = ("😔 You Lose. Paper beats Rock.");
         loseSound.play();
         cpuScore++;
     } else if (playerChoice == "paper" && computerChoice == "rock") {
         vsBoxPlayerCard.textContent = ("✋");
         vsBoxCompCard.textContent = ("✊");
         showResults();
-        resultText.textContent = ("You Win! Paper beats Rock!");
+        resultText.textContent = ("😀 You Win! Paper beats Rock!");
         winSound.play();
         playerScore ++;
     } else if (playerChoice == "paper" && computerChoice == "scissors") {
         vsBoxPlayerCard.textContent = ("✋");
         vsBoxCompCard.textContent = ("✌");
         showResults();
-        resultText.textContent = ("You Lose. Scissors beat Paper.");
+        resultText.textContent = ("😔 You Lose. Scissors beat Paper.");
         loseSound.play();
         cpuScore++;
     } else if (playerChoice == "scissors" && computerChoice == "paper") {
         vsBoxPlayerCard.textContent = ("✌");
         vsBoxCompCard.textContent = ("✋");
         showResults();
-        resultText.textContent = ("You Win! Scissors beats Paper!");
+        resultText.textContent = ("😀 You Win! Scissors beats Paper!");
         winSound.play();
         playerScore ++;
     } else if (playerChoice == "scissors" && computerChoice == "rock") {
         vsBoxPlayerCard.textContent = ("✌");
         vsBoxCompCard.textContent = ("✊");
         showResults();
-        resultText.textContent = ("You Lose. Rock beats Scissors.");
+        resultText.textContent = ("😔 You Lose. Rock beats Scissors.");
         loseSound.play();
         cpuScore++;
     } else if (playerChoice == "rock" && computerChoice == "rock") {
         vsBoxPlayerCard.textContent = ("✊");
         vsBoxCompCard.textContent = ("✊");
         showResults();
-        resultText.textContent = ("Draw.");
+        resultText.textContent = ("😐 Draw.");
         drawSound.play();
     } else if (playerChoice == "paper" && computerChoice == "paper") {
         vsBoxPlayerCard.textContent = ("✋");
         vsBoxCompCard.textContent = ("✋");
         showResults();
-        resultText.textContent = ("Draw.");
+        resultText.textContent = ("😐 Draw.");
         drawSound.play();
     } else {
         vsBoxPlayerCard.textContent = ("✌");
         vsBoxCompCard.textContent = ("✌");
         showResults();
-        resultText.textContent = ("Draw.");
+        resultText.textContent = ("😐 Draw.");
         drawSound.play();
     }
 
@@ -283,15 +283,15 @@ function evaluateScore() {
     hideRoundIndicator();
 
     if (playerScore > cpuScore) {
-        resultText.textContent = ("You win! Best out of 5!");
+        resultText.textContent = ("🏆 You win! Best out of 5!");
         resultWin.play();
         setTimeout(getPlayerReplay(), 2000);
     } else if (playerScore < cpuScore) {
-        resultText.textContent = ("You Lose. The CPU did best out of 5.");
+        resultText.textContent = ("🏳️ You Lose. The CPU did best out of 5.");
         resultLose.play();
         setTimeout(getPlayerReplay(), 2000);
     } else {
-        resultText.textContent = ("It was a draw.");
+        resultText.textContent = ("🤝 It was a draw.");
         drawSound.play();
         setTimeout(getPlayerReplay(), 2000);
     }
