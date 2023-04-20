@@ -2,56 +2,73 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Odin Project: Rock, Paper, Scissors</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rock Paper Scissors!</title>
         <link rel="stylesheet" href="styles.css">
     </head>
 
     <body>
-        <div class="header"></div>
-        <div class="block empty"></div>
-        <div class="game-container">
-            <h2 class="odin">The Odin Project</h2>
-            <div class="screen">
-                <div class="vs-box">
-                    <div class="card player-choice invisible"></div>
-                    <div class="vs-text invisible"><h4>VS.</h4></div>
-                    <div class="card cpu-choice invisible"></div>
-                </div>
-                <div class="result-container">
-                    <div class="result-image invisible"></div>
-                    <h4 class="result-text invisible">Results</h4>
-                </div>
-                <div class="screen-text-container">
-                    <div class="screen-text"><h4>( Turn On Console to Play )</h4></div>
-                </div>
-                <div class="replay-container invisible">
-                    <button class="replay" id="no-replay">NO</button>
-                    <button class="replay" id="yes-replay">YES</button>
-                </div>
-                <div class="round-indicator invisible">
-                    <h4>Round</h4>
-                    <div class="round-icon" id="one"></div>
-                    <div class="round-icon" id="two"></div>
-                    <div class="round-icon" id="three"></div>
-                    <div class="round-icon" id="four"></div>
-                    <div class="round-icon" id="five"></div>
+        <div class="header">Rock Paper Scissors</div>
+        <div class="empty-block"></div>
+        <div class="body">
+            <div class="empty-block"></div>
+            <div class="main">
+                <div class="game-container">
+                    <div class="screen-block">
+                        <div class="screen-container">
+                            <div class="power-indicator">
+                                <div class="power-icon"></div>
+                                <div class="pwr">PWR</div>
+                            </div>
+                            <div class="screen">
+                                <div class="game">
+                                    <div class="vs inactive">
+                                        <div class="player-object card">✊<div class="player">Player</div></div>
+                                        <h3>VS</h3>
+                                        <div class="cpu-object card">✊<div class="player">CPU</div></div>
+                                    </div>
+                                    <div class="results inactive">
+                                        <div class="result-image card">😊</div>
+                                        <div class="result-text">Hello</div>
+                                    </div>
+                                    <div class="screen-text-box">
+                                        <div class="screen-text">screen text</div>
+                                    </div>
+                                </div>
+                                <div class="round-indicator inactive">
+                                    <h4>Round</h4>
+                                    <div class="round-icon" id="round-1"></div>
+                                    <div class="round-icon" id="round-2"></div>
+                                    <div class="round-icon" id="round-3"></div>
+                                    <div class="round-icon" id="round-4"></div>
+                                    <div class="round-icon" id="round-5"></div>
+                                </div>
+                                <div class="overlay inactive">Overlay</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="title-block">
+                        <h1 class="title">The Odin Project <span class="rps-title">Rock Paper Scissors</span></h1>
+                    </div>
+                    <div class="game-control-block">
+                        <div class="player-choice button grayscale" id="Rock">✊</div>
+                        <div class="player-choice button grayscale" id="Paper">✋</div>
+                        <div class="player-choice button grayscale" id="Scissors">✌</div>
+                    </div>
+                    <div class="system-control-block">
+                        <div class="sound-bar">
+                            <div class="volume-on">🔊</div>
+                            <div class="slider"></div>
+                            <div class="volume-off inactive">🔇</div>
+                        </div>
+                        <div class="power button">I/O</div>
+                    </div>
                 </div>
             </div>
-            <h1 class="game-title">Rock, Paper, Scissors!</h1>
-            <div class="prompt-container">            
-                <h3 class="prompt invisible">Please Choose an Object</h3>
-            </div>
-            <div class="card-container">
-                <button class="player-card invisible" id="rock"><h5>&#x270A</h5></button>
-                <button class="player-card invisible" id="paper"><h5>&#x270B</h5></button>
-                <button class="player-card invisible" id="scissors"><h5>&#x270C</h5></button>
-           </div>
-            <div class="power-container">
-                <button class="power-button"><h6>I/O</h6></button>
-            </div>
+            <div class="empty-block"></div>
         </div>
-        <div class="block empty"></div>
-        <div class="footer"></div>
-        <script src="app.js"></script>
-    </body>    
+        <div class="empty-block"></div>
+        <div class="footer"><p>Mark Bernardo || <a href="https://github.com/markrbernardo/">GitHub</a></p></div>
+        <script src="javascript.js"></script>
+    </body>
 </html>

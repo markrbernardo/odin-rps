@@ -1,425 +1,190 @@
-//Connect HTML to Javascript
-//Containers
-const vsBox = document.querySelector(".vs-box");
-const resultContainer = document.querySelector(".result-container");
-const roundIndicator = document.querySelector(".round-indicator");
-const cardContainer = document.querySelector(".card-container");
-const replayContainer = document.querySelector(".replay-container");
+const vsBox = document.querySelector('.vs');
+const resultBox = document.querySelector('.results');
+const screenTextBox = document.querySelector('.screen-text-box');
+const roundIndicatorBox = document.querySelector('.round-indicator');
+const overlayBox = document.querySelector('.overlay');
 
-//Components
-const roundIcon = document.querySelectorAll(".round-icon");
-const vsBoxPlayerCard = document.querySelector(".player-choice");
-const vsText = document.querySelector(".vs-text");
-const vsBoxCompCard = document.querySelector(".cpu-choice")
-const playerCard = document.querySelectorAll(".player-card");
-const resultImage = document.querySelector(".result-image");
-const resultText = document.querySelector(".result-text");
-const screenText = document.querySelector(".screen-text");
-const gameTitle = document.querySelector(".game-title");
-const powerButton = document.querySelector(".power-button");
-const playerPrompt = document.querySelector(".prompt");
-const replayButton = document.querySelectorAll(".replay");
-const one = document.querySelector("#one");
-const two = document.querySelector("#two");
-const three = document.querySelector("#three");
-const four = document.querySelector("#four");
-const five = document.querySelector("#five");
+const playerObject = document.querySelector('.player-object');
+const cpuObject = document.querySelector('.cpu-object');
+const resultImage = document.querySelector('.result-image');
+const resultText = document.querySelector('.result-text');
+const screenText = document.querySelector('.screen-text');
 
-//Default States
-let power = 0;
-let round = 0;
-let playerSelection;
-let computerChoice;
-let playerScore = 0;
+const roundOne = document.querySelector('#round-1');
+const roundTwo = document.querySelector('#round-2');
+const roundThree = document.querySelector('#round-3');
+const roundFour = document.querySelector('#round-4');
+const roundFive = document.querySelector('#round-5');
+
+const playerChoice = document.querySelectorAll('.player-choice');
+
+const volumeOn = document.querySelector('.volume-on');
+const volumeOff = document.querySelector('.volume-off');
+const soundBar = document.querySelector('.sound-bar');
+const powerIcon = document.querySelector('.power-icon');
+const powerButton = document.querySelector('.power');
+
+let power = "off";
+let round = 1;
 let cpuScore = 0;
-let roundNumber;
+let playerScore = 0;
+let cpuDecision;
+let playerDecision;
+screenText.textContent = "< Turn on Console To Play >";
+powerButton.addEventListener('click', activateGame);
 
-//Sounds
-const powerOnSound = new Audio("audio/power-on-sound.mp3");
-const powerOffSound = new Audio("audio/power-off-sound.mp3");
-const winSound = new Audio("audio/win-sound.mp3");
-const loseSound = new Audio("audio/lose-sound.mp3");
-const drawSound = new Audio ("audio/draw-sound.mp3");
-const resultWin = new Audio ("audio/result-win-sound.mp3");
-const resultLose = new Audio ("audio/result-lose-sound.mp3");
+const weapons = ['Rock', 'Paper', 'Scissors'];
 
 
-//The Stage
-powerSwitch();
-
-
-
-//Switch function
-function powerSwitch () {
-    screenText.textContent = "< Turn on Console to Play >";
-
-    powerButton.addEventListener("click", () => {
-        if (power == 0) {
-            console.log(power);
-            powerOnSequence();
-
-        }   else {
-            console.log(power);
-            console.log(round);
-            round = 0;
-            powerOffSequence();
-        }
-    });
+function activateGame() {
+    if (power == "off") {
+        powerOn();
+    } else {
+        powerOff();
+    }
 }
 
-//Sequences
-function powerOnSequence() {
-    hideScreenText();
-    powerOnSound.play();
-    screenText.textContent = "Welcome to Rock Paper Scissors!";
-    setTimeout (() => {
-        showScreenText();
-        roundIndicatorSequence();
-    }, 1500);
-    power = 1;
+function powerOn() {
+    power = "on";
+    console.log('RPS Power: On')
+    powerIcon.style.backgroundColor = "red";
+    screenText.textContent = "Welcome to Rock Paper Scissors";
+    removeClassFromPlayerChoice('grayscale');
+    evaluateRound();
 }
 
-function powerOffSequence() {
-    clearTimeout(roundIndicatorSequence);
-    powerOffSound.play();
-    hideResults();
-    hideVsBox();
-    hideRoundIndicator();
-    hidePlayerPrompt();
-    screenText.textContent = "Powering off..";
-    showScreenText();
-    showPowerText();
-    round = 0;
-    power = 0;
+function powerOff() {
+    round = 1;
+    power = "off";
+    console.log('RPS Power: Off');
+    powerIcon.style.backgroundColor = "white";
+    screenText.textContent = "< Turn on Console To Play >";
 }
 
-function roundIndicatorSequence() {
-    round++;
-    console.log(round);
-
-    setTimeout(() => {
-        hideResults();
-        hideVsBox();
-        roundCounter();
-    }, 3000);
+function displayRound() {
+    removeClassName(roundIndicatorBox, 'inactive');
     
-    function roundCounter() {
-        hideScreenText();
-        if (round == 1) {
-            one.classList.add("shade");
-            roundNumber = 1;
-            showRoundText();
-            setupPlayerInterface();
-        } else if (round == 2) {
-            one.classList.add("shade");
-            two.classList.add("shade");
-            roundNumber = 2;
-            showRoundText();
-            setupPlayerInterface();
-        } else if (round == 3) {
-            one.classList.add("shade");
-            two.classList.add("shade");
-            three.classList.add("shade");
-            roundNumber = 3;
-            showRoundText();
-            setupPlayerInterface();
-        } else if (round == 4) {
-            one.classList.add("shade");
-            two.classList.add("shade");
-            three.classList.add("shade");
-            four.classList.add("shade");
-            roundNumber = 4;
-            showRoundText();
-            setupPlayerInterface();
-        } else if (round == 5) {
-            one.classList.add("shade");
-            two.classList.add("shade");
-            three.classList.add("shade");
-            four.classList.add("shade");
-            five.classList.add("shade");
-            roundNumber = 5;
-            showRoundText();
-            setupPlayerInterface();
-        } else if (round == 6) {
-            showResults();
-            setTimeout(evaluateScore(), 3000);
-        } else {
-            clearTimeout(roundIndicatorSequence);
-        }
+    if (round == 1) {
+        addClassName(roundOne, 'current');
+        screenText.textContent = `Round ${round}`;
+    } else if (round == 2) {
+        addClassName(roundTwo, 'current');
+        screenText.textContent = `Round ${round}`;
+    } else if (round == 3) {
+        addClassName(roundThree, 'current');
+        screenText.textContent = `Round ${round}`;
+    } else if (round == 4) {
+        addClassName(roundFour, 'current');
+        screenText.textContent = `Round ${round}`;
+    } else if (round == 5) {
+        addClassName(roundFive, 'current');
+        screenText.textContent = `Round ${round}`;
+    } else if (round == 6) {
+        console.log('Something went wrong');
     }
 }
 
 
-function showRoundText() {
-    screenText.textContent = (`Round ${roundNumber}`);
-    showScreenText();
-    showRoundIndicator();
-}
-
-/* Script for RPS */
-//Create an array to store RPS
-const objectChoices = ["rock", "paper", "scissors"];
-
-//getComputerChoice() from random array
-function getComputerChoice() {
-    let cpuChoice = objectChoices[Math.floor(Math.random() * objectChoices.length)];
-    console.log(cpuChoice);
+function getCPUChoice() {
+    let cpuChoice = weapons[Math.floor(Math.random() * weapons.length)];
+    console.log(`CPU's Weapon: | ${cpuChoice.toUpperCase()} |`);
     return cpuChoice;
 }
 
-//getPlayerChoice() from card clicks
-playerCard.forEach((card) => {
-    card.addEventListener("click", () => {
-        const objectChoice = card.getAttribute("id");
-        playerChoice = objectChoice;
-        console.log(playerChoice);
+playerChoice.forEach((button) => {
+    button.addEventListener('click', () => {
+        evaluateRound();
+        console.log(`----- Round ${round} -----`);
         
-        hidePlayerPrompt();
-        hidePlayerCards();
-
-        if (round <= 5) {
-            setTimeout(gamePlay(playerChoice, computerChoice), 1000);
-        } else {
-            setTimeout(evaluateScore(), 3000);
-        }
-    })
-});
-
-function setupPlayerInterface() {
-    setTimeout(() => {
-        showPlayerPrompt();
-        showPlayerCards();
-    }, 1500);
-}
-
-
-function gamePlay (playerChoice, computerChoice) {
-    hideScreenText();
-    computerChoice = getComputerChoice().toLowerCase();
-    playerChoice = playerChoice.toLowerCase();
-
-    showVsBox();
-
-    if (playerChoice == "rock" && computerChoice == "scissors") {
-        vsBoxPlayerCard.textContent = ("✊");
-        vsBoxCompCard.textContent = ("✌");
-        showResults();
-        resultText.textContent = ("😀 You Win! Rock beats Scissors!");
-        winSound.play();
-        playerScore ++;
-    } else if (playerChoice == "rock" && computerChoice == "paper") {
-        vsBoxPlayerCard.textContent = ("✊");
-        vsBoxCompCard.textContent = ("✋");
-        showResults();
-        resultText.textContent = ("😔 You Lose. Paper beats Rock.");
-        loseSound.play();
-        cpuScore++;
-    } else if (playerChoice == "paper" && computerChoice == "rock") {
-        vsBoxPlayerCard.textContent = ("✋");
-        vsBoxCompCard.textContent = ("✊");
-        showResults();
-        resultText.textContent = ("😀 You Win! Paper beats Rock!");
-        winSound.play();
-        playerScore ++;
-    } else if (playerChoice == "paper" && computerChoice == "scissors") {
-        vsBoxPlayerCard.textContent = ("✋");
-        vsBoxCompCard.textContent = ("✌");
-        showResults();
-        resultText.textContent = ("😔 You Lose. Scissors beat Paper.");
-        loseSound.play();
-        cpuScore++;
-    } else if (playerChoice == "scissors" && computerChoice == "paper") {
-        vsBoxPlayerCard.textContent = ("✌");
-        vsBoxCompCard.textContent = ("✋");
-        showResults();
-        resultText.textContent = ("😀 You Win! Scissors beats Paper!");
-        winSound.play();
-        playerScore ++;
-    } else if (playerChoice == "scissors" && computerChoice == "rock") {
-        vsBoxPlayerCard.textContent = ("✌");
-        vsBoxCompCard.textContent = ("✊");
-        showResults();
-        resultText.textContent = ("😔 You Lose. Rock beats Scissors.");
-        loseSound.play();
-        cpuScore++;
-    } else if (playerChoice == "rock" && computerChoice == "rock") {
-        vsBoxPlayerCard.textContent = ("✊");
-        vsBoxCompCard.textContent = ("✊");
-        showResults();
-        resultText.textContent = ("😐 Draw.");
-        drawSound.play();
-    } else if (playerChoice == "paper" && computerChoice == "paper") {
-        vsBoxPlayerCard.textContent = ("✋");
-        vsBoxCompCard.textContent = ("✋");
-        showResults();
-        resultText.textContent = ("😐 Draw.");
-        drawSound.play();
-    } else {
-        vsBoxPlayerCard.textContent = ("✌");
-        vsBoxCompCard.textContent = ("✌");
-        showResults();
-        resultText.textContent = ("😐 Draw.");
-        drawSound.play();
-    }
-
-    roundListener();
-}
-
-
-function roundListener () {
-    console.log(round);
-    
-    if (round <= 5) {
-        roundIndicatorSequence();
-    } else {
-        evaluateScore();
-    }
-}
-
-
-function evaluateScore() {
-    hideVsBox();
-    hideScreenText();
-    hideRoundIndicator();
-
-    if (playerScore > cpuScore) {
-        resultText.textContent = ("🏆 You win! Best out of 5!");
-        resultWin.play();
-        setTimeout(getPlayerReplay(), 2000);
-    } else if (playerScore < cpuScore) {
-        resultText.textContent = ("🏳️ You Lose. The CPU did best out of 5.");
-        resultLose.play();
-        setTimeout(getPlayerReplay(), 2000);
-    } else {
-        resultText.textContent = ("🤝 It was a draw.");
-        drawSound.play();
-        setTimeout(getPlayerReplay(), 2000);
-    }
-
-    
-}
-
-
-function getPlayerReplay() {
-   setTimeout(() => {
-    showScreenText();
-    screenText.textContent = ("Would you Like to Play Again?");
-    showReplayContainer();
-    hideVsBox();
-    hideRoundIndicator();
-    hidePlayerPrompt();
-    hidePlayerCards();
-   }, 3000);
-}
-
-function clearRoundIcons() {
-    two.classList.remove("shade");
-    three.classList.remove("shade");
-    four.classList.remove("shade");
-    five.classList.remove("shade");
-}
-
-replayButton.forEach((option) => {
-    option.addEventListener("click", () => {
-        const replayChoice = option.getAttribute("id");
-            
-        if (replayChoice.toLowerCase() == "yes-replay") {
-            hideReplayContainer();
-            hideScreenText();
-            hideResults();
-            console.log(round);
-            powerOnSound.play();
-            clearRoundIcons();
-            round = 0;
-            roundIndicatorSequence();
-        } else {
-            hideReplayContainer();
-            hideResults();
-            clearRoundIcons();
-            powerOffSequence();
-        }
-    })
+        const playerDecision = button.getAttribute('id');
+        console.log(`Player's Weapon: | ${playerDecision.toUpperCase()} |`)
+        
+        playRound(playerDecision, cpuDecision);
+    });
 })
 
-function showPowerText() {
-    setTimeout(() => {
-        screenText.textContent = "< Turn on Console to Play >";
-        hidePlayerCards();
-        }, 1400);
+
+
+
+
+function playRound(playerDecision, cpuDecision) {
+    cpuDecision = getCPUChoice().toLowerCase();
+    playerDecision = playerDecision.toLowerCase();
+    
+    console.log('');
+    
+    if (playerDecision == 'rock' && cpuDecision == 'rock'){
+        printRoundEvaluation(playerDecision, cpuDecision, 0)
+        console.log('Draw');
+    } else if (playerDecision == 'rock' && cpuDecision == 'paper'){
+        printRoundEvaluation(playerDecision, cpuDecision, 1)
+        console.log('You Lose');
+    } else if (playerDecision == 'rock' && cpuDecision == 'scissors'){
+        printRoundEvaluation(playerDecision, cpuDecision, 2)
+        console.log('You Win!');
+    } else if (playerDecision == 'paper' && cpuDecision == 'paper'){
+        printRoundEvaluation(playerDecision, cpuDecision, 0)
+        console.log('Draw');
+    } else if (playerDecision == 'paper' && cpuDecision == 'scissors'){
+        printRoundEvaluation(playerDecision, cpuDecision, 1)
+        console.log('You Lose');
+    } else if (playerDecision == 'paper' && cpuDecision == 'rock'){
+        printRoundEvaluation(playerDecision, cpuDecision, 2)
+        console.log('You Win!');
+    } else if (playerDecision == 'scissors' && cpuDecision == 'scissors'){
+        printRoundEvaluation(playerDecision, cpuDecision, 0)
+        console.log('Draw');
+    } else if (playerDecision == 'scissors' && cpuDecision == 'rock'){
+        printRoundEvaluation(playerDecision, cpuDecision, 1)
+        console.log('You Lose');
+    } else if (playerDecision == 'scissors' && cpuDecision == 'paper'){
+        printRoundEvaluation(playerDecision, cpuDecision, 2)
+        console.log('You Win!');
+    } else {
+        console.log('Something went wrong. Please Try Again');
+    }
+
+    if (round < 5) {
+        round++;
+    } else {
+        console.log('Go to Evaluation');
+    }
+
+    
 }
 
-
-function showPlayerPrompt() {
-    playerPrompt.classList.remove("invisible");
+//Customized functions//
+function addClassName(element, className) {
+    element.classList.add(className);
 }
 
-function hidePlayerPrompt() {
-    playerPrompt.classList.add("invisible");
+function removeClassName(element, className) {
+    element.classList.remove(className);
 }
 
-function showReplayContainer() {
-    replayContainer.classList.remove("invisible");
+function printToElement(element, string) {
+    element.textContent = string;
 }
 
-function hideReplayContainer() {
-    replayContainer.classList.add("invisible");
+function removeClassFromPlayerChoice(className) {
+    playerChoice.forEach((button) => {
+        button.classList.remove(className);
+    });
 }
 
-function showScreenText() {
-    screenText.classList.remove("invisible");
+function printRoundEvaluation(playerDecision, cpuDecision, reference) {
+    let roundEvaluationText = [
+        'Draw',
+        `You lose. ${cpuDecision} beats ${playerDecision}`,
+        `You win! ${playerDecision} beats ${cpuDecision}`,
+    ];
+    return printToElement(screenText, roundEvaluationText[reference]);
 }
 
-function hideScreenText() {
-    screenText.classList.add("invisible");
-}
-
-function showRoundIndicator() {
-    roundIndicator.classList.remove("invisible");
-}
-
-function hideRoundIndicator() {
-    roundIndicator.classList.add("invisible");
-}
-
-function showResults() {
-    resultImage.classList.remove("invisible");
-    resultText.classList.remove("invisible");
-}
-
-function hideResults() {
-    resultImage.classList.add("invisible");
-    resultText.classList.add("invisible");
-}
-
-function showPlayerCards() {
-    for (var i = 0; i < playerCard.length; i++) {
-        playerCard[i].classList.remove("invisible");
+function evaluateRound() {
+    if (round <= 5) {
+        displayRound();
+    } else if (round = 6){
+        console.log('Evaluate');
     }
 }
-
-function hidePlayerCards() {
-    for (var i = 0; i < playerCard.length; i++) {
-        playerCard[i].classList.add("invisible");
-    }
-}
-
-function showVsBox() {
-    vsBoxPlayerCard.classList.remove("invisible");
-    vsText.classList.remove("invisible");
-    vsBoxCompCard.classList.remove("invisible");
-}
-
-function hideVsBox() {
-    vsBoxPlayerCard.classList.add("invisible");
-    vsText.classList.add("invisible");
-    vsBoxCompCard.classList.add("invisible");
-}
-//Unused Code
-
-//Text Flash Script
-/* let screenTextFlash =  setInterval(() => {
-    screenText.classList.add("invisible");
-    setTimeout(() => {screenText.classList.remove("invisible");}, 2000)
-});
-
-clearInterval(screenTextFlash); */
