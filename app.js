@@ -2,7 +2,7 @@ const vsBox = document.querySelector('.vs');
 const resultBox = document.querySelector('.results');
 const screenTextBox = document.querySelector('.screen-text-box');
 const roundIndicatorBox = document.querySelector('.round-indicator');
-const overlayBox = document.querySelector('.overlay');
+const replayBox = document.querySelector('.replay-box');
 
 const playerObject = document.querySelector('.player-object');
 const cpuObject = document.querySelector('.cpu-object');
@@ -17,23 +17,30 @@ const roundFour = document.querySelector('#round-4');
 const roundFive = document.querySelector('#round-5');
 
 const playerChoice = document.querySelectorAll('.player-choice');
+let playerChoiceArray = [...playerChoice];
 
 const volumeOn = document.querySelector('.volume-on');
 const volumeOff = document.querySelector('.volume-off');
 const soundBar = document.querySelector('.sound-bar');
 const powerIcon = document.querySelector('.power-icon');
 const powerButton = document.querySelector('.power');
+const replayConfirmButton = document.getElementById('confirm');
+const replayDeclineButton = document.getElementById('decline');
 
+const weapons = ['Rock', 'Paper', 'Scissors'];
+
+//Game's Default State ------------------------------------
 let power = "off";
 let round = 1;
 let cpuScore = 0;
 let playerScore = 0;
 let cpuDecision;
 let playerDecision;
-screenText.textContent = "< Turn on Console To Play >";
+printToElement(screenText, '< Turn on Console To Play >');
 powerButton.addEventListener('click', activateGame);
-
-const weapons = ['Rock', 'Paper', 'Scissors'];
+replayConfirmButton.addEventListener('click', resetGame);
+replayDeclineButton.addEventListener('click', powerOff);
+//---------------------------------------------------------
 
 
 function activateGame() {
@@ -46,47 +53,65 @@ function activateGame() {
 }
 
 function powerOn() {
+    console.log('');
     power = "on";
     console.log('RPS Power: On')
+    console.log('');
+
     powerIcon.style.backgroundColor = "red";
+    
+    console.log('Welcome to Rock Paper Scissors!');
     printToElement(screenText, 'Welcome to Rock Paper Scissors');
+    console.log('');
+
     activatePlayerChoice();
     removeGrayscaleFromPlayerChoice();
-    evaluateRound();
-
- 
-
     console.log('Activate Player Controls');
+    evaluateRound();
 }
 
 function powerOff() {
     round = 1;
+    console.log('');
     resetRoundIcons();
     addClassName(vsBox, 'inactive');
     addClassName(resultBox, 'inactive');
     addClassName(roundIndicatorBox, 'inactive');
-    removeClassName(screenText,'inactive');
-    deactivatePlayerChoice();
+    addClassName(replayBox, 'inactive');
+    removeClassName(screenTextBox,'inactive');
     addGrayscaleToPlayerChoice();
     power = "off";
     console.log('RPS Power: Off');
     powerIcon.style.backgroundColor = "white";
-    screenText.textContent = "< Turn on Console To Play >";
+    printToElement(screenText, '< Turn on Console To Play >');
+}
 
 
-    console.log('Dectivate Player Controls');
+function resetGame() {
+    round = 1;
+    resetRoundIcons();
+    console.log('');
+    console.log('------------- Resetting Game -------------');
+    console.log('');
+    
+    evaluateRound();
 }
 
 function evaluateRound() {
     if (round <= 5) {
         displayRound();
-    } else if (round = 6){
-        console.log('Evaluate');
+    } else if (round >= 6){
+        evaluateGame();
     }
 }
 
 function displayRound() {
+    addClassName(vsBox, 'inactive');
+    addClassName(resultBox, 'inactive');
+    addClassName(replayBox, 'inactive');
+    removeClassName(screenTextBox, 'inactive');
     removeClassName(roundIndicatorBox, 'inactive');
+    console.log('');
     
     if (round == 1) {
         addClassName(roundOne, 'current');
@@ -107,7 +132,7 @@ function displayRound() {
         console.log('Something went wrong');
     }
 
-    console.log(`----- Round ${round} -----`);
+    console.log(`----------- Round ${round} -----------`);
 }
 
 
@@ -127,62 +152,70 @@ function playRound(playerDecision, cpuDecision) {
     if (playerDecision == 'rock' && cpuDecision == 'rock'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
-        addClassName(screenText, 'inactive');
+        addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 0)
         console.log('Draw');
     } else if (playerDecision == 'rock' && cpuDecision == 'paper'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
-        addClassName(screenText, 'inactive');
+        addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 1)
+        cpuScore++;
         console.log('You Lose');
     } else if (playerDecision == 'rock' && cpuDecision == 'scissors'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
-        addClassName(screenText, 'inactive');
+        addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 2)
         console.log('You Win!');
+        playerScore++;
     } else if (playerDecision == 'paper' && cpuDecision == 'paper'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
-        addClassName(screenText, 'inactive');
+        addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 0)
         console.log('Draw');
     } else if (playerDecision == 'paper' && cpuDecision == 'scissors'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
-        addClassName(screenText, 'inactive');
+        addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 1)
         console.log('You Lose');
+        cpuScore++;
     } else if (playerDecision == 'paper' && cpuDecision == 'rock'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
-        addClassName(screenText, 'inactive');
+        addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 2)
         console.log('You Win!');
+        playerScore++;
     } else if (playerDecision == 'scissors' && cpuDecision == 'scissors'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
-        addClassName(screenText, 'inactive');
+        addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 0)
         console.log('Draw');
     } else if (playerDecision == 'scissors' && cpuDecision == 'rock'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
-        addClassName(screenText, 'inactive');
+        addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 1)
         console.log('You Lose');
+        cpuScore++;
     } else if (playerDecision == 'scissors' && cpuDecision == 'paper'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
-        addClassName(screenText, 'inactive');
+        addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 2)
         console.log('You Win!');
+        playerScore++;
     } else {
-        console.log('Something went wrong. Please Try Again');
+        console.log('Something went wrong. Please Refresh Page');
     }
 
-    if (round < 5) {
+    console.log('-------------------------------');
+
+    if (round <= 5) {
         round++;
     } else {
         console.log('Go to Evaluation');
@@ -204,66 +237,31 @@ function printToElement(element, string) {
     element.textContent = string;
 }
 
-function activatePlayerChoice() {
+function activatePlayerChoice() {  
+    playerChoiceArray.forEach((button) => {
+        if (power === "on") {
+        //Adds Hover styling to buttons//
+            button.addEventListener('mouseover', () => {
+                addClassName(button, 'card-hover');
+            });
+            button.addEventListener('mouseout', () => {
+                removeClassName(button, 'card-hover');
+            });
+            button.addEventListener('click', () => {
+                playerDecision = button.getAttribute('id');
 
-    if (power == "on") {
-        playerChoice.forEach((card) => {
-            //Adds Hover styling to buttons//
-            card.addEventListener('mouseover', addButtonHover(card));
-            card.addEventListener('mouseout', removeButtonHover(card));
-            card.addEventListener('click', getPlayerDecision);
-            
-            function addButtonHover(element) {
-                addClassName(element, 'card-hover');
-            }
-            
-            function removeButtonHover(element) {
-                removeClassName(element, 'card-hover');
-            }
-            
-            function getPlayerDecision() {
-                return playerDecision = card.getAttribute('id');
-            }
-        });
-
-    } else  if (power == "off") {
-        // Removes event listeners when power is "off"
-        playerChoice.forEach((card) => {
-            card.removeEventListener('mouseover', addButtonHover);
-            card.removeEventListener('mouseout', removeButtonHover);
-            card.removeEventListener('click', getPlayerDecision);
-        });
-    }
-}
-
-if (playerDecision != undefined) {
-    evaluateRound();
-    console.log(`Player's Weapon: | ${playerDecision.toUpperCase()} |`);
-    playRound(playerDecision, cpuDecision);
-}
-
-
-function deactivatePlayerChoice() {
-    playerChoice.forEach((button) => {
-        //Removes Hover styling to buttons//
-        button.removeEventListener('mouseover', () => {
-            addClassName(button, 'card-hover');
-        })
-        button.removeEventListener('mouseout', () => {
-            removeClassName(button, 'card-hover');
-        })
-    
-    
-        //Stops Gameplay on click
-        button.removeEventListener('click', () => {
-            evaluateRound();
-            const playerDecision = button.getAttribute('id');
-            console.log(`Player's Weapon: | ${playerDecision.toUpperCase()} |`);
-            
-            playRound(playerDecision, cpuDecision);
-        });
+                if (round <= 5 && playerDecision != undefined) {
+                    console.log(`Player's Weapon: | ${playerDecision.toUpperCase()} |`);
+                    playRound(playerDecision, cpuDecision);
+                } else {
+                }
+                evaluateRound();
+            });
+        };
     });
-}
+}   
+
+
 
 function removeGrayscaleFromPlayerChoice() {
     playerChoice.forEach((button) => {
@@ -291,6 +289,35 @@ function resetRoundIcons() {
     removeClassName(roundThree, 'current');
     removeClassName(roundFour, 'current');
     removeClassName(roundFive, 'current');
+}
+
+function evaluateGame() {
+    addClassName(vsBox, 'inactive');
+    addClassName(screenTextBox, 'inactive');
+    removeClassName(replayBox, 'inactive');
+    
+    console.log('');
+    console.log('⅋⅋⅋⅋⅋⅋ Final Score ⅋⅋⅋⅋⅋⅋⅋');
+    console.log('Of 5 Rounds, the final score is:');
+    console.log(`Player Score: ${playerScore} || CPU Score: ${cpuScore}`);
+    console.log('');
+
+    if (playerScore > cpuScore) {
+        printToElement(resultImage, '🏆');
+        printToElement(resultText, 'Congratulations! You won the game!');
+        console.log('You won the game!');
+    } else if (playerScore == cpuScore) {
+        printToElement(resultImage, '🤝');
+        printToElement(resultText, 'The game concluded in a Draw.');
+        console.log('The game was a Draw.');
+    } else if (playerScore < cpuScore) {
+        printToElement(resultImage, '🏳️');
+        printToElement(resultText, 'You lost the game.');
+        console.log('You lost the game.');
+    } else {
+        console.log('Due to unforeseen circumstances, we cannot evaluate the outcome');
+    }
+    console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
 }
 
 /*
