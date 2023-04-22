@@ -146,11 +146,11 @@ h4 {
 }
 
 .result-image {
-    margin-left: 0.5em;
+    margin-left: 0.2em;
 }
 
 .result-text {
-    margin: 0 1.5em;
+    padding-left: 0.5em;
     font-size: 12pt;
 }
 
