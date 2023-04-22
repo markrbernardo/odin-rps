@@ -353,18 +353,23 @@ function printRoundEvaluation(playerDecision, cpuDecision, reference) {
 function resetRoundIcons() {
     removeClassName(roundOne, 'win');
     removeClassName(roundOne, 'lose');
+    removeClassName(roundOne, 'draw');
     removeClassName(roundTwo, 'current');
     removeClassName(roundTwo, 'win');
     removeClassName(roundTwo, 'lose');
+    removeClassName(roundTwo, 'draw');
     removeClassName(roundThree, 'current');
     removeClassName(roundThree, 'lose');
     removeClassName(roundThree, 'win');
+    removeClassName(roundThree, 'draw');
     removeClassName(roundFour, 'current');
     removeClassName(roundFour, 'win');
     removeClassName(roundFour, 'lose');
+    removeClassName(roundFour, 'draw');
     removeClassName(roundFive, 'current');
     removeClassName(roundFive, 'win');
     removeClassName(roundFive, 'lose');
+    removeClassName(roundFive, 'draw');
 }
 
 function evaluateGame() {
