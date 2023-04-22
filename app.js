@@ -103,6 +103,8 @@ function powerOff() {
 function resetGame() {
     resetSound.play();
     round = 1;
+    playerScore = 0;
+    cpuScore = 0;
     addClassName(vsBox, 'inactive');
     addClassName(resultBox, 'inactive');
     addClassName(replayBox, 'inactive');
