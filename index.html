@@ -23,9 +23,15 @@
                             <div class="screen">
                                 <div class="game">
                                     <div class="vs inactive">
-                                        <div class="player-object card">✊<div class="player">Player</div></div>
+                                        <div class="vs-player">
+                                            <div class="player-object card">✊</div>
+                                            <div class="player">Player</div>
+                                        </div>
                                         <h3>VS</h3>
-                                        <div class="cpu-object card">✊<div class="player">CPU</div></div>
+                                        <div class="vs-cpu">
+                                            <div class="cpu-object card">✊</div>
+                                            <div class="player">CPU</div>
+                                        </div>
                                     </div>
                                     <div class="results inactive">
                                         <div class="result-image card">😊</div>
@@ -62,7 +68,7 @@
                         <div class="player-choice button grayscale" id="Scissors">✌</div>
                     </div>
                     <div class="system-control-block">
-                        <div class="sound-bar">
+                        <div class="sound-bar inactive">
                             <div class="volume-on">🔊</div>
                             <div class="slider"></div>
                             <div class="volume-off inactive">🔇</div>
@@ -73,7 +79,7 @@
             </div>
             <div class="empty-block"></div>
         </div>
-        <div class="empty-block"></div>
+        <div class="empty-block">**Announcement: 04.22.2023 - App currently breaks when you turn the application off, and then turn it back on to play. Also, when you choose options too quickly**</div>
         <div class="footer"><p>Mark Bernardo || <a href="https://github.com/markrbernardo/">GitHub</a></p></div>
         <script src="app.js"></script>
     </body>

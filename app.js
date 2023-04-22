@@ -1,3 +1,13 @@
+const powerOnSound = new Audio('audio/power-on.mp3');
+const powerOffSound = new Audio('audio/power-off.mp3');
+const resetSound = new Audio('audio/reset.mp3');
+const drawSound = new Audio('audio/draw.mp3');
+const winSound = new Audio('audio/win.mp3');
+const loseSound = new Audio('audio/lose.mp3');
+const resultDrawSound = new Audio('audio/result-draw.mp3');
+const resultWinSound = new Audio('audio/result-win.mp3');
+const resultLoseSound = new Audio('audio/result-lose.mp3');
+
 const vsBox = document.querySelector('.vs');
 const resultBox = document.querySelector('.results');
 const screenTextBox = document.querySelector('.screen-text-box');
@@ -36,7 +46,8 @@ let cpuScore = 0;
 let playerScore = 0;
 let cpuDecision;
 let playerDecision;
-printToElement(screenText, '< Turn on Console To Play >');
+screenText.setAttribute('style', 'white-space: pre;');
+printToElement(screenText, '< Turn on Console To Play >\r\n \r\nWarning: This application has Sound!');
 powerButton.addEventListener('click', activateGame);
 replayConfirmButton.addEventListener('click', resetGame);
 replayDeclineButton.addEventListener('click', powerOff);
@@ -53,6 +64,7 @@ function activateGame() {
 }
 
 function powerOn() {
+    powerOnSound.play();
     console.log('');
     power = "on";
     console.log('RPS Power: On')
@@ -67,10 +79,11 @@ function powerOn() {
     activatePlayerChoice();
     removeGrayscaleFromPlayerChoice();
     console.log('Activate Player Controls');
-    setTimeout(evaluateRound, 1000);
+    setTimeout(evaluateRound, 2500);
 }
 
 function powerOff() {
+    powerOffSound.play();
     round = 1;
     console.log('');
     resetRoundIcons();
@@ -88,6 +101,7 @@ function powerOff() {
 
 
 function resetGame() {
+    resetSound.play();
     round = 1;
     addClassName(vsBox, 'inactive');
     addClassName(resultBox, 'inactive');
@@ -96,10 +110,12 @@ function resetGame() {
     console.log('');
     console.log('------------- Resetting Game -------------');
     console.log('');
-    printToElement(screenText, 'Resetting Game...')
-    removeClassName(screenText, 'inactive');
-    
-    setTimeout(evaluateRound, 1000);
+    printToElement(screenText, 'Resetting Game...');
+    removeClassName(screenTextBox, 'inactive');
+    removeClassName(playerObject, 'font-modify');
+    removeClassName(cpuObject, 'font-modify');
+
+    setTimeout(evaluateRound, 1500);
 
 }
 
@@ -107,7 +123,7 @@ function evaluateRound() {
     if (round <= 5) {
         displayRound();
     } else if (round >= 6){
-        evaluateGame();
+       setTimeout(evaluateGame, 750);
     }
 }
 
@@ -156,6 +172,8 @@ function playRound(playerDecision, cpuDecision) {
     console.log('');
     
     if (playerDecision == 'rock' && cpuDecision == 'rock'){
+        printToElement(playerObject, '✊');
+        printToElement(cpuObject, '✊');
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
@@ -163,6 +181,8 @@ function playRound(playerDecision, cpuDecision) {
         setDraw();
         shadeRoundIcon();
     } else if (playerDecision == 'rock' && cpuDecision == 'paper'){
+        printToElement(playerObject, '✊');
+        printToElement(cpuObject, '✋');
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
@@ -170,6 +190,8 @@ function playRound(playerDecision, cpuDecision) {
         setCpuWin();
         shadeRoundIcon();
     } else if (playerDecision == 'rock' && cpuDecision == 'scissors'){
+        printToElement(playerObject, '✊');
+        printToElement(cpuObject, '✌');
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
@@ -177,6 +199,8 @@ function playRound(playerDecision, cpuDecision) {
         setPlayerWin();
         shadeRoundIcon();
     } else if (playerDecision == 'paper' && cpuDecision == 'paper'){
+        printToElement(playerObject, '✋');
+        printToElement(cpuObject, '✋');
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
@@ -184,6 +208,8 @@ function playRound(playerDecision, cpuDecision) {
         setDraw();
         shadeRoundIcon();
     } else if (playerDecision == 'paper' && cpuDecision == 'scissors'){
+        printToElement(playerObject, '✋');
+        printToElement(cpuObject, '✌');
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
@@ -191,6 +217,8 @@ function playRound(playerDecision, cpuDecision) {
         setCpuWin();
         shadeRoundIcon();
     } else if (playerDecision == 'paper' && cpuDecision == 'rock'){
+        printToElement(playerObject, '✋');
+        printToElement(cpuObject, '✊');
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
@@ -198,6 +226,8 @@ function playRound(playerDecision, cpuDecision) {
         setPlayerWin();
         shadeRoundIcon();
     } else if (playerDecision == 'scissors' && cpuDecision == 'scissors'){
+        printToElement(playerObject, '✌');
+        printToElement(cpuObject, '✌');
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
@@ -205,6 +235,8 @@ function playRound(playerDecision, cpuDecision) {
         setDraw();
         shadeRoundIcon();
     } else if (playerDecision == 'scissors' && cpuDecision == 'rock'){
+        printToElement(playerObject, '✌');
+        printToElement(cpuObject, '✊');
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
@@ -212,6 +244,8 @@ function playRound(playerDecision, cpuDecision) {
         setCpuWin();
         shadeRoundIcon();
     } else if (playerDecision == 'scissors' && cpuDecision == 'paper'){
+        printToElement(playerObject, '✌');
+        printToElement(cpuObject, '✋');
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
@@ -264,7 +298,7 @@ function activatePlayerChoice() {
                     playRound(playerDecision, cpuDecision);
                 } else {
                 }
-                setTimeout(evaluateRound, 1000);
+                setTimeout(evaluateRound, 1700);
             });
         };
     });
@@ -272,6 +306,7 @@ function activatePlayerChoice() {
 
 function setPlayerWin() {
     ++playerScore;
+    winSound.play();
     shadeRoundIcon('win');
     printToElement(resultImage, "😎");
     console.log('You Win!');
@@ -279,12 +314,14 @@ function setPlayerWin() {
 
 function setCpuWin() {
     ++cpuScore;
+    loseSound.play();
     shadeRoundIcon('lose');
     printToElement(resultImage, "😵");
     console.log('You Lose');
 }
 
 function setDraw() {
+    drawSound.play();
     shadeRoundIcon('draw');
     printToElement(resultImage, "😐");
     console.log('Draw');
@@ -329,10 +366,14 @@ function resetRoundIcons() {
 }
 
 function evaluateGame() {
-    addClassName(vsBox, 'inactive');
     addClassName(screenTextBox, 'inactive');
     removeClassName(replayBox, 'inactive');
-    
+
+    addClassName(playerObject, 'font-modify');
+    addClassName(cpuObject, 'font-modify');
+    printToElement(playerObject, `${playerScore}`);
+    printToElement(cpuObject, `${cpuScore}`);
+
     console.log('');
     console.log('⅋⅋⅋⅋⅋⅋ Final Score ⅋⅋⅋⅋⅋⅋⅋');
     console.log('Of 5 Rounds, the final score is:');
@@ -340,14 +381,17 @@ function evaluateGame() {
     console.log('');
 
     if (playerScore > cpuScore) {
+        resultWinSound.play();
         printToElement(resultImage, '🏆');
         printToElement(resultText, 'Congratulations! You won the game!');
         console.log('You won the game!');
     } else if (playerScore == cpuScore) {
+        resultDrawSound.play();
         printToElement(resultImage, '🤝');
         printToElement(resultText, 'The game concluded in a Draw.');
         console.log('The game was a Draw.');
     } else if (playerScore < cpuScore) {
+        resultLoseSound.play();
         printToElement(resultImage, '🏳️');
         printToElement(resultText, 'You lost the game.');
         console.log('You lost the game.');
