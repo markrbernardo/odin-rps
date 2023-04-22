@@ -69,3 +69,16 @@
 - Need to fix eventListener issues. 
     - Need to somehow make the function work for both add/removeEventListener. (Simply stating the same anonymous function does not mean that the functions are the same.)
     - Therefore, I think I need to somehow simplify the expressions in order to make this work.
+
+## 04.21.2023
+- Still unable to fix the eventListener issue. -Reverted back to a working console code.
+- Made some loops to make a FULL stop after 5-rounds on the console.
+- Finished gameEvaluation -Would like to eventually put a score-display-box
+- I don't know why the screeenText showing the rounds, don't work - Fixed. mistook screenText for screenTextBox
+- Game works when player completes first run-through and subsequent runs of gameplay.
+- Game breaks after application is turned off using the power button or declines replay, then player turns application back on. Round system is off due to eventListeners not being removed on "power off".
+- Player W/L Function in round-indicator - Fix Functionality
+- Need to implement setTimeout() in order for game to be comprehended by the player.
+- Set up vsbox text - finished
+- Had to add a line of code in default state in app.js to allow for a line break in the textContent of screenText
+- I may declare this as a soft v1.0?
