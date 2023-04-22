@@ -155,64 +155,78 @@ function playRound(playerDecision, cpuDecision) {
         addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 0)
         console.log('Draw');
+        setDraw();
+        shadeRoundIcon();
     } else if (playerDecision == 'rock' && cpuDecision == 'paper'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 1)
-        cpuScore++;
         console.log('You Lose');
+        setCpuWin();
+        shadeRoundIcon();
     } else if (playerDecision == 'rock' && cpuDecision == 'scissors'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 2)
         console.log('You Win!');
-        playerScore++;
+        setPlayerWin();
+        shadeRoundIcon();
     } else if (playerDecision == 'paper' && cpuDecision == 'paper'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 0)
         console.log('Draw');
+        setDraw();
+        shadeRoundIcon();
     } else if (playerDecision == 'paper' && cpuDecision == 'scissors'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 1)
         console.log('You Lose');
-        cpuScore++;
+        setCpuWin();
+        shadeRoundIcon();
     } else if (playerDecision == 'paper' && cpuDecision == 'rock'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 2)
         console.log('You Win!');
-        playerScore++;
+        setPlayerWin();
+        shadeRoundIcon();
     } else if (playerDecision == 'scissors' && cpuDecision == 'scissors'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 0)
         console.log('Draw');
+        setDraw();
+        shadeRoundIcon();
     } else if (playerDecision == 'scissors' && cpuDecision == 'rock'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 1)
         console.log('You Lose');
-        cpuScore++;
+        setCpuWin();
+        shadeRoundIcon();
     } else if (playerDecision == 'scissors' && cpuDecision == 'paper'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
         printRoundEvaluation(playerDecision, cpuDecision, 2)
         console.log('You Win!');
-        playerScore++;
+        setPlayerWin();
+        shadeRoundIcon();
     } else {
         console.log('Something went wrong. Please Refresh Page');
     }
 
+    console.log('-------------------------------');
+    console.log(`Player Score: ${playerScore} || CPU Score: ${cpuScore}`);
     console.log('-------------------------------');
 
     if (round <= 5) {
@@ -220,8 +234,6 @@ function playRound(playerDecision, cpuDecision) {
     } else {
         console.log('Go to Evaluation');
     }
-
-    
 }
 
 //Customized functions//
@@ -261,7 +273,19 @@ function activatePlayerChoice() {
     });
 }   
 
+function setPlayerWin() {
+    ++playerScore;
+    shadeRoundIcon('win');
+}
 
+function setCpuWin() {
+    ++cpuScore;
+    shadeRoundIcon('lose');
+}
+
+function setDraw() {
+    shadeRoundIcon(true);
+}
 
 function removeGrayscaleFromPlayerChoice() {
     playerChoice.forEach((button) => {
@@ -285,10 +309,20 @@ function printRoundEvaluation(playerDecision, cpuDecision, reference) {
 }
 
 function resetRoundIcons() {
+    removeClassName(roundOne, 'win');
+    removeClassName(roundOne, 'lose');
     removeClassName(roundTwo, 'current');
+    removeClassName(roundTwo, 'win');
+    removeClassName(roundTwo, 'lose');
     removeClassName(roundThree, 'current');
+    removeClassName(roundThree, 'lose');
+    removeClassName(roundThree, 'win');
     removeClassName(roundFour, 'current');
+    removeClassName(roundFour, 'win');
+    removeClassName(roundFour, 'lose');
     removeClassName(roundFive, 'current');
+    removeClassName(roundFive, 'win');
+    removeClassName(roundFive, 'lose');
 }
 
 function evaluateGame() {
@@ -329,3 +363,47 @@ function evaluateGame() {
 
 
 */
+
+function shadeRoundIcon (roundResult) {
+    if (round == 1) {
+        if (roundResult == 'win') {
+            addClassName(roundOne, 'win');
+        } else if (roundResult == 'lose') {
+            addClassName(roundOne, 'lose');
+        } else {
+
+        };
+    } else if (round == 2) {
+        if (roundResult == 'win') {
+            addClassName(roundTwo, 'win');
+        } else if (roundResult == 'lose') {
+            addClassName(roundTwo, 'lose');
+        } else {
+            
+        };
+    } else if (round == 3) {
+        if (roundResult == 'win') {
+            addClassName(roundThree, 'win');
+        } else if (roundResult == 'lose') {
+            addClassName(roundThree, 'lose');
+        } else {
+            
+        };
+    } else if (round == 4) {
+        if (roundResult == 'win') {
+            addClassName(roundFour, 'win');
+        } else if (roundResult == 'lose') {
+            addClassName(roundFour, 'lose');
+        } else {
+            
+        };
+    } else if (round == 5) {
+        if (roundResult == 'win') {
+            addClassName(roundFive, 'win');
+        } else if (roundResult == 'lose') {
+            addClassName(roundFive, 'lose');
+        } else {
+            
+        };
+    }
+}
