@@ -67,7 +67,7 @@ function powerOn() {
     activatePlayerChoice();
     removeGrayscaleFromPlayerChoice();
     console.log('Activate Player Controls');
-    evaluateRound();
+    setTimeout(evaluateRound, 1000);
 }
 
 function powerOff() {
@@ -89,12 +89,18 @@ function powerOff() {
 
 function resetGame() {
     round = 1;
+    addClassName(vsBox, 'inactive');
+    addClassName(resultBox, 'inactive');
+    addClassName(replayBox, 'inactive');
     resetRoundIcons();
     console.log('');
     console.log('------------- Resetting Game -------------');
     console.log('');
+    printToElement(screenText, 'Resetting Game...')
+    removeClassName(screenText, 'inactive');
     
-    evaluateRound();
+    setTimeout(evaluateRound, 1000);
+
 }
 
 function evaluateRound() {
@@ -153,72 +159,63 @@ function playRound(playerDecision, cpuDecision) {
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
-        printRoundEvaluation(playerDecision, cpuDecision, 0)
-        console.log('Draw');
+        printRoundEvaluation(playerDecision, cpuDecision, 0);
         setDraw();
         shadeRoundIcon();
     } else if (playerDecision == 'rock' && cpuDecision == 'paper'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
-        printRoundEvaluation(playerDecision, cpuDecision, 1)
-        console.log('You Lose');
+        printRoundEvaluation(playerDecision, cpuDecision, 1);
         setCpuWin();
         shadeRoundIcon();
     } else if (playerDecision == 'rock' && cpuDecision == 'scissors'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
-        printRoundEvaluation(playerDecision, cpuDecision, 2)
-        console.log('You Win!');
+        printRoundEvaluation(playerDecision, cpuDecision, 2);
         setPlayerWin();
         shadeRoundIcon();
     } else if (playerDecision == 'paper' && cpuDecision == 'paper'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
-        printRoundEvaluation(playerDecision, cpuDecision, 0)
-        console.log('Draw');
+        printRoundEvaluation(playerDecision, cpuDecision, 0);
         setDraw();
         shadeRoundIcon();
     } else if (playerDecision == 'paper' && cpuDecision == 'scissors'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
-        printRoundEvaluation(playerDecision, cpuDecision, 1)
-        console.log('You Lose');
+        printRoundEvaluation(playerDecision, cpuDecision, 1);
         setCpuWin();
         shadeRoundIcon();
     } else if (playerDecision == 'paper' && cpuDecision == 'rock'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
-        printRoundEvaluation(playerDecision, cpuDecision, 2)
-        console.log('You Win!');
+        printRoundEvaluation(playerDecision, cpuDecision, 2);
         setPlayerWin();
         shadeRoundIcon();
     } else if (playerDecision == 'scissors' && cpuDecision == 'scissors'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
-        printRoundEvaluation(playerDecision, cpuDecision, 0)
-        console.log('Draw');
+        printRoundEvaluation(playerDecision, cpuDecision, 0);
         setDraw();
         shadeRoundIcon();
     } else if (playerDecision == 'scissors' && cpuDecision == 'rock'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
-        printRoundEvaluation(playerDecision, cpuDecision, 1)
-        console.log('You Lose');
+        printRoundEvaluation(playerDecision, cpuDecision, 1);
         setCpuWin();
         shadeRoundIcon();
     } else if (playerDecision == 'scissors' && cpuDecision == 'paper'){
         removeClassName(resultBox, 'inactive');
         removeClassName(vsBox, 'inactive');
         addClassName(screenTextBox, 'inactive');
-        printRoundEvaluation(playerDecision, cpuDecision, 2)
-        console.log('You Win!');
+        printRoundEvaluation(playerDecision, cpuDecision, 2);
         setPlayerWin();
         shadeRoundIcon();
     } else {
@@ -267,7 +264,7 @@ function activatePlayerChoice() {
                     playRound(playerDecision, cpuDecision);
                 } else {
                 }
-                evaluateRound();
+                setTimeout(evaluateRound, 1000);
             });
         };
     });
@@ -276,15 +273,21 @@ function activatePlayerChoice() {
 function setPlayerWin() {
     ++playerScore;
     shadeRoundIcon('win');
+    printToElement(resultImage, "😎");
+    console.log('You Win!');
 }
 
 function setCpuWin() {
     ++cpuScore;
     shadeRoundIcon('lose');
+    printToElement(resultImage, "😵");
+    console.log('You Lose');
 }
 
 function setDraw() {
-    shadeRoundIcon(true);
+    shadeRoundIcon('draw');
+    printToElement(resultImage, "😐");
+    console.log('Draw');
 }
 
 function removeGrayscaleFromPlayerChoice() {
@@ -370,40 +373,40 @@ function shadeRoundIcon (roundResult) {
             addClassName(roundOne, 'win');
         } else if (roundResult == 'lose') {
             addClassName(roundOne, 'lose');
-        } else {
-
+        } else if (roundResult == 'draw') {
+            addClassName(roundOne, 'draw');
         };
     } else if (round == 2) {
         if (roundResult == 'win') {
             addClassName(roundTwo, 'win');
         } else if (roundResult == 'lose') {
             addClassName(roundTwo, 'lose');
-        } else {
-            
+        } else if (roundResult == 'draw') {
+            addClassName(roundTwo, 'draw');
         };
     } else if (round == 3) {
         if (roundResult == 'win') {
             addClassName(roundThree, 'win');
         } else if (roundResult == 'lose') {
             addClassName(roundThree, 'lose');
-        } else {
-            
+        } else if (roundResult == 'draw') {
+            addClassName(roundThree, 'draw');
         };
     } else if (round == 4) {
         if (roundResult == 'win') {
             addClassName(roundFour, 'win');
         } else if (roundResult == 'lose') {
             addClassName(roundFour, 'lose');
-        } else {
-            
+        } else if (roundResult == 'draw') {
+            addClassName(roundFour, 'draw');
         };
     } else if (round == 5) {
         if (roundResult == 'win') {
             addClassName(roundFive, 'win');
         } else if (roundResult == 'lose') {
             addClassName(roundFive, 'lose');
-        } else {
-            
+        } else if (roundResult == 'draw') {
+            addClassName(roundFive, 'draw');            
         };
     }
 }
